@@ -1,6 +1,7 @@
+// src/components/sections/ServicesSections.js
 "use client";
 
-import React, { use } from "react";
+import React from "react";
 import {
   Box,
   Container,
@@ -94,6 +95,7 @@ export default function ServicesSections() {
   return (
     <Box sx={{ background: "#fff", py: { xs: 8, md: 12 } }}>
       <Container maxWidth="lg">
+        {/* Título */}
         <Typography
           variant="h3"
           align="center"
@@ -114,19 +116,42 @@ export default function ServicesSections() {
           y optimizar cada aspecto de tu negocio
         </Typography>
 
-        <Grid container spacing={4} sx={{ mb: 7 }}>
+        {/* Grid de 6 cards: 3 columnas x 2 filas */}
+        <Grid
+          container
+          spacing={4}
+          sx={{ mb: 7, justifyContent: "center", maxWidth: 1200, mx: "auto" }}
+        >
           {services.map((service, idx) => (
-            <Grid item xs={12} sm={6} md={4} key={service.title}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              key={service.title}
+              display="flex"
+              sx={{
+                display: "flex",
+                alignItems: "stretch",
+                justifyContent: "center",
+                minWidth: 0,
+              }}
+            >
               <Card
                 elevation={3}
                 sx={{
                   borderRadius: 3,
                   p: 3,
-                  minHeight: 290,
-                  boxShadow: "0 4px 24px 0 rgba(60,60,120,0.08)",
+                  minHeight: 320,
+                  maxWidth: 360,
+                  width: "100%",
                   display: "flex",
                   flexDirection: "column",
                   gap: 2,
+                  boxShadow: "0 4px 24px rgba(60,60,120,0.08)",
+                  background: "#fff",
+                  flex: 1,
+                  alignItems: "flex-start",
                 }}
               >
                 <Box
@@ -147,14 +172,32 @@ export default function ServicesSections() {
                 <Typography
                   variant="h6"
                   fontWeight={700}
-                  sx={{ color: textPrimary }}
+                  sx={{
+                    color: textPrimary,
+                    width: "100%",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
                 >
                   {service.title}
                 </Typography>
-                <Typography variant="body2" sx={{ color: grey, mb: 1 }}>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: grey,
+                    mb: 1,
+                    width: "100%",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                >
                   {service.description}
                 </Typography>
-                <Stack spacing={0.5}>
+                <Stack spacing={0.5} sx={{ width: "100%" }}>
                   {service.bullets.map((b) => (
                     <Box
                       key={b}
@@ -166,7 +209,15 @@ export default function ServicesSections() {
                           fontSize: 18,
                         }}
                       />
-                      <Typography variant="body2" sx={{ color: textPrimary }}>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          color: textPrimary,
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
                         {b}
                       </Typography>
                     </Box>
@@ -177,25 +228,23 @@ export default function ServicesSections() {
           ))}
         </Grid>
 
+        {/* Call to action */}
         <Box
           sx={{
-            background: primary,
             borderRadius: 3,
             p: { xs: 4, md: 5 },
-            boxShadow: `0 4px 24px 0 ${primary}22`,
+            boxShadow: `0 4px 24px rgba(${secondary}22)`,
             textAlign: "center",
-            color: "#fff",
+            color: textPrimary,
             maxWidth: 900,
             mx: "auto",
+            mt: 2,
           }}
         >
           <Typography variant="h5" fontWeight={900} sx={{ mb: 1 }}>
             ¿Listo para transformar tu empresa?
           </Typography>
-          <Typography
-            variant="subtitle1"
-            sx={{ mb: 3, color: "#fff", opacity: 0.9 }}
-          >
+          <Typography variant="subtitle1" sx={{ mb: 3, color: grey }}>
             Descubre si tu organización está preparada para una implementación
             exitosa de Odoo ERP
           </Typography>
@@ -210,7 +259,7 @@ export default function ServicesSections() {
               px: 4,
               py: 1.5,
               fontSize: 18,
-              boxShadow: `0 2px 8px 0 ${secondary}22`,
+              boxShadow: `0 2px 8px rgba(${secondary}22)`,
               textTransform: "none",
               "&:hover": { background: primary },
             }}

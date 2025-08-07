@@ -109,7 +109,7 @@ export default function PartnersSection() {
                 }}
               >
                 <Image
-                  src="/logo-odoo.png"
+                  src="/odoo_partner.png"
                   alt="Odoo Ready Partner"
                   fill
                   style={{ objectFit: "contain" }}
@@ -300,28 +300,7 @@ export default function PartnersSection() {
                 </Box>
               </Card>
             </Stack>
-            <Button
-              variant="contained"
-              size="large"
-              sx={{
-                mt: 4,
-                borderRadius: 2,
-                fontWeight: 700,
-                alignSelf: "flex-start",
-                px: 4,
-                py: 1.5,
-                fontSize: 18,
-                background: primary,
-                boxShadow: `0 2px 8px 0 ${primary}18`,
-                textTransform: "none",
-                color: "#fff",
-                "&:hover": {
-                  background: secondary,
-                },
-              }}
-            >
-              → Conoce Nuestros Servicios
-            </Button>
+            {/* Botón eliminado por solicitud */}
           </Grid>
         </Grid>
       </Container>
