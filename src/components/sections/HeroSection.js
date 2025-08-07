@@ -26,9 +26,9 @@ export default function HeroSection() {
       }}
     >
       <Container maxWidth="lg">
-        <Grid container spacing={4} alignItems="center">
-          {/* Texto y botones */}
-          <Grid item xs={12} md={6}>
+        {/* Primera fila: Título + subtítulo + botones */}
+        <Grid container spacing={4}>
+          <Grid item xs={12} sm={6}>
             <Typography variant="h3" fontWeight="bold" gutterBottom>
               Transformamos tu{" "}
               <Box component="span" color="primary.main">
@@ -63,52 +63,60 @@ export default function HeroSection() {
                 Ver Servicios
               </Button>
             </Stack>
+          </Grid>
+        </Grid>
 
+        {/* Segunda fila: Features a la izquierda + Logo a la derecha */}
+        <Grid container spacing={4} alignItems="flex-end">
+          {/* Features */}
+          <Grid item xs={12} sm={6}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={4}>
-                <Card elevation={0} sx={{ textAlign: "center" }}>
-                  <CardContent>
+              {[
+                {
+                  icon: (
                     <RocketLaunchIcon
-                      color="primary"
                       sx={{ fontSize: 40, mb: 1 }}
+                      color="primary"
                     />
-                    <Typography variant="h6">Implementación Rápida</Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Proyectos optimizados en tiempo récord
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                <Card elevation={0} sx={{ textAlign: "center" }}>
-                  <CardContent>
-                    <PeopleIcon color="primary" sx={{ fontSize: 40, mb: 1 }} />
-                    <Typography variant="h6">Equipo Experto</Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Especialistas certificados en Odoo
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                <Card elevation={0} sx={{ textAlign: "center" }}>
-                  <CardContent>
+                  ),
+                  title: "Implementación Rápida",
+                  subtitle: "Proyectos optimizados en tiempo récord",
+                },
+                {
+                  icon: (
+                    <PeopleIcon sx={{ fontSize: 40, mb: 1 }} color="primary" />
+                  ),
+                  title: "Equipo Experto",
+                  subtitle: "Especialistas certificados en Odoo",
+                },
+                {
+                  icon: (
                     <AssessmentIcon
-                      color="primary"
                       sx={{ fontSize: 40, mb: 1 }}
+                      color="primary"
                     />
-                    <Typography variant="h6">ROI Garantizado</Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Resultados medibles y sostenibles
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
+                  ),
+                  title: "ROI Garantizado",
+                  subtitle: "Resultados medibles y sostenibles",
+                },
+              ].map((feat) => (
+                <Grid key={feat.title} item xs={12} sm={4}>
+                  <Card elevation={0} sx={{ textAlign: "center" }}>
+                    <CardContent>
+                      {feat.icon}
+                      <Typography variant="h6">{feat.title}</Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {feat.subtitle}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
             </Grid>
           </Grid>
 
-          {/* Logo grande */}
-          <Grid item xs={12} md={6} sx={{ textAlign: "center" }}>
+          {/* Logo */}
+          <Grid item xs={12} sm={6} sx={{ textAlign: "center" }}>
             <Box
               sx={{
                 display: "inline-block",
