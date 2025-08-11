@@ -14,7 +14,8 @@ export default function Footer() {
     >
       <Container maxWidth="lg">
         <Typography variant="body2" align="center">
-          © {new Date().getFullYear()} MiERP. Todos los derechos reservados.
+          © {new Date().getFullYear()} Tersoft 2025. Todos los derechos
+          reservados.
         </Typography>
       </Container>
     </Box>

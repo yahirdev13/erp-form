@@ -3,7 +3,9 @@ import Typography from "@mui/material/Typography";
 
 import HeroSection from "../src/components/sections/HeroSection";
 import ParthersSection from "../src/components/sections/ParthersSection";
-import ServicesSection from "@/src/components/sections/ServicesSections";
+import ServicesSection from "../src/components/sections/ServicesSections";
+import StepperWrapper from "../src/components/Stepper";
+import QuestionnaireStepper from "../src/components/QuestionnaireStepper";
 
 export default function Page() {
   return (
@@ -12,6 +14,7 @@ export default function Page() {
 
       <ParthersSection />
       <ServicesSection />
+      <QuestionnaireStepper />
     </div>
   );
 }
