@@ -32,7 +32,7 @@ export default function NavBar() {
         {/* Logo + Nombre */}
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <Image
-            src="/logo.png" // Ajusta al path de tu logo
+            src="/logo_tersoft.png" // Ajusta al path de tu logo
             alt="Tersoft"
             width={40}
             height={40}

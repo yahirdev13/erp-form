@@ -56,7 +56,7 @@ export default function PartnersSection() {
             align="center"
             sx={{ letterSpacing: -1, color: textPrimary }}
           >
-            Nuestros{" "}
+            Somos{" "}
             <Box
               component="span"
               sx={{ color: secondary, fontWeight: 900, display: "inline" }}

@@ -83,7 +83,7 @@ SolidStepIcon.propTypes = {
 // Pasos del Stepper
 const steps = [
   "Datos Generales",
-  "Categoría de negocio",
+  "Sector de negocio",
   "Cuestionario Transversal",
   "Cuestionario Sectorial",
   "Resultado",

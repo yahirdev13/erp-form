@@ -1,0 +1,95 @@
+{
+  "industry": "Manufactura",
+  "questions": [
+    {
+      "id": 1,
+      "text": "¿Cuenta con un sistema para la planificación de la producción?",
+      "options": [
+        { "text": "Sí, totalmente automatizado e integrado", "score": 5 },
+        { "text": "Sí, pero manual o parcial", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "¿Gestiona digitalmente el inventario de materias primas y productos terminados?",
+      "options": [
+        { "text": "Sí, en tiempo real", "score": 5 },
+        { "text": "Sí, pero no en tiempo real", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "¿Cuenta con control de calidad documentado y digital?",
+      "options": [
+        { "text": "Sí, integrado al flujo de producción", "score": 5 },
+        { "text": "Sí, pero parcial", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "¿Registra digitalmente las órdenes de trabajo y su estado?",
+      "options": [
+        { "text": "Sí, con seguimiento en tiempo real", "score": 5 },
+        { "text": "Sí, pero manual o retrasado", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "¿Controla y analiza el rendimiento de maquinaria y equipos?",
+      "options": [
+        { "text": "Sí, con reportes automatizados", "score": 5 },
+        { "text": "Sí, pero manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "¿Tiene un sistema para gestionar mantenimiento preventivo y correctivo?",
+      "options": [
+        { "text": "Sí, integrado y automatizado", "score": 5 },
+        { "text": "Sí, pero parcial o manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "¿Gestiona digitalmente las compras de insumos y materias primas?",
+      "options": [
+        { "text": "Sí, con control de proveedores e inventario", "score": 5 },
+        { "text": "Sí, pero manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "¿Cuenta con trazabilidad completa de los productos fabricados?",
+      "options": [
+        { "text": "Sí, desde materia prima hasta producto final", "score": 5 },
+        { "text": "Sí, pero parcial", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "¿Tiene control digital de tiempos de producción y entregas?",
+      "options": [
+        { "text": "Sí, en tiempo real", "score": 5 },
+        { "text": "Sí, pero estimado o manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "¿Cuenta con reportes para analizar costos y márgenes por lote o producto?",
+      "options": [
+        { "text": "Sí, automatizado", "score": 5 },
+        { "text": "Sí, pero manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    }
+  ]
+}
