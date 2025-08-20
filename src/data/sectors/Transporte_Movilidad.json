@@ -1,1 +1,95 @@
-{}
+{
+  "industry": "Transporte y Movilidad",
+  "questions": [
+    {
+      "id": 1,
+      "text": "¿Planifica rutas y horarios con capacidad (asientos/tonelaje) y ventanas de tiempo definidas?",
+      "options": [
+        { "text": "Sí, optimizado y en tiempo real", "score": 5 },
+        { "text": "Sí, pero manual o parcial", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "¿Administra flota con telemetría/GPS, odómetro, consumo de combustible y comportamiento del conductor?",
+      "options": [
+        { "text": "Sí, integrado y con alertas", "score": 5 },
+        { "text": "Sí, pero básico o desconectado", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "¿Ejecuta mantenimiento preventivo/correctivo con órdenes de trabajo, repuestos y control de paros?",
+      "options": [
+        { "text": "Sí, con planes, historial y costos", "score": 5 },
+        { "text": "Sí, pero sin historial completo o costos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "¿Realiza despacho/asignación digital de unidades y operadores con estatus y confirmación en app móvil?",
+      "options": [
+        { "text": "Sí, en tiempo real con trazabilidad", "score": 5 },
+        { "text": "Sí, pero manual (llamadas/hojas de cálculo)", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "¿Controla costos por viaje/km/ruta (combustible, peajes, nómina) y rentabilidad por contrato/cliente?",
+      "options": [
+        { "text": "Sí, calculado automáticamente y con KPIs", "score": 5 },
+        { "text": "Sí, pero con cálculos manuales o parciales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "¿Gestiona documentación y cumplimiento (licencias, pólizas, verificaciones, permisos SCT) con alertas de vencimiento?",
+      "options": [
+        { "text": "Sí, con repositorio y alertas automáticas", "score": 5 },
+        { "text": "Sí, pero con control manual o incompleto", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "Para carga en México: ¿emite CFDI Carta Porte integrado al flujo de operación y facturación?",
+      "options": [
+        { "text": "Sí, automatizado e integrado", "score": 5 },
+        { "text": "Sí, pero con pasos manuales o fuera del sistema", "score": 3 },
+        { "text": "No aplica o no", "score": 0 }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "¿Administra contratos y SLAs (puntualidad, OTIF, tiempos de carga/descarga) con penalizaciones/bonos?",
+      "options": [
+        { "text": "Sí, con seguimiento y reportes periódicos", "score": 5 },
+        { "text": "Sí, pero sin medición consistente", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "¿Gestiona incidentes (accidentes, multas, retrasos) con registro, análisis de causa y acciones correctivas?",
+      "options": [
+        { "text": "Sí, con flujo y responsables definidos", "score": 5 },
+        { "text": "Sí, pero registro disperso o sin análisis", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "¿Dispone de tableros de KPIs (ocupación/utilización, puntualidad, km recorridos, consumo, mantenimiento) automáticos?",
+      "options": [
+        { "text": "Sí, con actualización programada y alertas", "score": 5 },
+        { "text": "Sí, pero reportes manuales o esporádicos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    }
+  ]
+}

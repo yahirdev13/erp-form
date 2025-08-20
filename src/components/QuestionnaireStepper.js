@@ -59,7 +59,7 @@ const industries = [
   "Servicios Profesionales",
   "Finanzas y Seguros",
   "ONGs y Sector Social",
-  "Energía y Utilities",
+  "Energía",
 ];
 
 // 3–5 preguntas generales (transversales)

@@ -1,1 +1,95 @@
-{}
+{
+  "industry": "ONGs y Sector Social",
+  "questions": [
+    {
+      "id": 1,
+      "text": "¿Estructura sus programas/proyectos con objetivos, indicadores (marco lógico) y presupuesto por actividad?",
+      "options": [
+        { "text": "Sí, estandarizado y actualizado por proyecto", "score": 5 },
+        { "text": "Sí, pero parcial o sin indicadores claros", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "¿Registra beneficiarios con criterios de elegibilidad, consentimientos y protección de datos (privacy/seguridad)?",
+      "options": [
+        { "text": "Sí, con validaciones y control de acceso", "score": 5 },
+        { "text": "Sí, pero manual o sin consentimientos formales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "¿Gestiona donantes en un CRM (historial, segmentos, comunicaciones, agradecimientos y retención)?",
+      "options": [
+        { "text": "Sí, con campañas y segmentación activa", "score": 5 },
+        { "text": "Sí, pero básico o sin segmentación/automatización", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "En México: ¿emite recibos deducibles (CFDI Donatarias) e integra cumplimiento SAT y reportes contables?",
+      "options": [
+        { "text": "Sí, automatizado e integrado a contabilidad", "score": 5 },
+        { "text": "Sí, pero con emisión o conciliación manual/parcial", "score": 3 },
+        { "text": "No aplica o no", "score": 0 }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "¿Administra subvenciones (grants) con hitos, entregables, calendario de pagos y reportes a financiadores?",
+      "options": [
+        { "text": "Sí, con flujos de aprobación y alertas", "score": 5 },
+        { "text": "Sí, pero con control parcial o en hojas de cálculo", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "¿Mide impacto con KPIs (beneficiarios atendidos, resultados, costo por beneficiario) y tableros automáticos?",
+      "options": [
+        { "text": "Sí, con reportes periódicos y trazabilidad", "score": 5 },
+        { "text": "Sí, pero reportes manuales o esporádicos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "¿Gestiona voluntariado (reclutamiento, roles, horas, capacitaciones) y asignación a actividades/proyectos?",
+      "options": [
+        { "text": "Sí, con registro y seguimiento centralizado", "score": 5 },
+        { "text": "Sí, pero básico o con registro manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "¿Administra donaciones en especie con valuación, inventario, distribución y trazabilidad hasta el beneficiario?",
+      "options": [
+        { "text": "Sí, integrado a almacén y contabilidad", "score": 5 },
+        { "text": "Sí, pero con controles parciales o manuales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "¿Opera recaudación multicanal (campañas, eventos, pasarelas, domiciliación) con conciliación bancaria automática?",
+      "options": [
+        { "text": "Sí, con métricas de conversión y recurrencia", "score": 5 },
+        { "text": "Sí, pero con conciliación o métricas manuales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "¿Controla presupuesto vs. gasto por proyecto, políticas de gasto, aprobaciones y bitácora de auditoría (transparencia)?",
+      "options": [
+        { "text": "Sí, con centros de costo y auditoría completa", "score": 5 },
+        { "text": "Sí, pero con aprobaciones o controles parciales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    }
+  ]
+}

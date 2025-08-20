@@ -1,1 +1,95 @@
-{}
+{
+  "industry": "Alimentación y Bebidas",
+  "questions": [
+    {
+      "id": 1,
+      "text": "¿Tiene recetas/formulaciones estandarizadas con rendimientos, mermas y conversión de unidades (kg → porciones)?",
+      "options": [
+        { "text": "Sí, con costos calculados por receta y variante", "score": 5 },
+        { "text": "Sí, pero sin costos completos o rendimientos confiables", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "¿Controla inventario por lote y fecha de caducidad aplicando reglas FEFO/ FIFO en tiempo real?",
+      "options": [
+        { "text": "Sí, por lote/caducidad y con FEFO aplicado", "score": 5 },
+        { "text": "Sí, pero parcial (sin FEFO o sin tiempo real)", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "¿Garantiza trazabilidad completa (ascendente y descendente) desde proveedores hasta el cliente final por lote?",
+      "options": [
+        { "text": "Sí, con rastreo de lotes en todas las etapas", "score": 5 },
+        { "text": "Sí, pero solo en algunas etapas o manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "¿Ejecuta controles de calidad e inocuidad (HACCP/POES) en recepción, proceso y producto terminado con registros digitales?",
+      "options": [
+        { "text": "Sí, con planes, límites críticos y no conformidades", "score": 5 },
+        { "text": "Sí, pero parcial o con registros manuales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "¿Monitorea cadena de frío/temperaturas (cámaras, transporte) con bitácoras y alertas ante desviaciones?",
+      "options": [
+        { "text": "Sí, con lecturas y alertas sistematizadas", "score": 5 },
+        { "text": "Sí, pero con lecturas esporádicas o sin alertas", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "¿Planifica producción y compras (MRP) según demanda, inventario y consumo real por receta?",
+      "options": [
+        { "text": "Sí, con cálculo automático y reabasto sugerido", "score": 5 },
+        { "text": "Sí, pero en hojas de cálculo o parcialmente", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "¿Gestiona homologación de proveedores e insumos con documentos como COA, certificaciones y vigencias?",
+      "options": [
+        { "text": "Sí, con evaluaciones y alertas de vencimiento", "score": 5 },
+        { "text": "Sí, pero sin control de vigencias o evaluación formal", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "¿Administra información de alérgenos, etiquetado y fichas técnicas accesibles para ventas y operaciones?",
+      "options": [
+        { "text": "Sí, centralizado y visible en todo el flujo", "score": 5 },
+        { "text": "Sí, pero incompleto o desactualizado", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "¿Controla mermas, desperdicios y re-procesos con causas, autorizaciones y revalorización de inventario?",
+      "options": [
+        { "text": "Sí, con registro, análisis y acciones correctivas", "score": 5 },
+        { "text": "Sí, pero sin análisis o autorizaciones formales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "¿Analiza costos y márgenes por producto/receta, canal y lote considerando mermas y comisiones?",
+      "options": [
+        { "text": "Sí, con reportes automáticos y KPIs periódicos", "score": 5 },
+        { "text": "Sí, pero con cálculos manuales o esporádicos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    }
+  ]
+}

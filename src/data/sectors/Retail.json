@@ -1,0 +1,95 @@
+{
+  "industry": "Retail (Comercio Minorista)",
+  "questions": [
+    {
+      "id": 1,
+      "text": "¿Su catálogo maneja SKUs únicos, variantes (talla/color) y atributos estandarizados?",
+      "options": [
+        { "text": "Sí, con nomenclatura y validaciones consistentes", "score": 5 },
+        { "text": "Sí, pero parcial o sin estandarización completa", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "¿Opera un punto de venta (POS) con control de caja (aperturas, cortes, arqueos) integrado a inventario y contabilidad?",
+      "options": [
+        { "text": "Sí, integrado y con controles de caja", "score": 5 },
+        { "text": "Sí, pero con procesos manuales o separados", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "¿Mantiene inventario en tiempo real por tienda y almacén, con ubicaciones internas si aplica?",
+      "options": [
+        { "text": "Sí, en tiempo real y por ubicación", "score": 5 },
+        { "text": "Sí, pero solo a nivel global o con retrasos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "¿Usa códigos de barras (EAN/UPC) o QR para recepción, traspasos y venta en caja?",
+      "options": [
+        { "text": "Sí, en todas las operaciones clave", "score": 5 },
+        { "text": "Sí, pero solo en algunas operaciones", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "¿Gestiona reabastecimiento por tienda (puntos de reorden, mínimos/máximos, lead times)?",
+      "options": [
+        { "text": "Sí, con cálculo automático y alertas", "score": 5 },
+        { "text": "Sí, pero con hojas de cálculo o manualmente", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "¿Maneja listas de precios, promociones y cupones con reglas (fechas, segmentos, combos, 2x1)?",
+      "options": [
+        { "text": "Sí, parametrizado y controlado por reglas", "score": 5 },
+        { "text": "Sí, pero con limitaciones o gestión manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "¿Gestiona devoluciones e intercambios con reingreso al inventario y trazabilidad al ticket/venta?",
+      "options": [
+        { "text": "Sí, con flujo definido e integrado", "score": 5 },
+        { "text": "Sí, pero parcial o manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "¿Controla mermas (caducidad, roturas, robo hormiga) con conteos cíclicos y autorizaciones?",
+      "options": [
+        { "text": "Sí, con causas, evidencias y auditorías", "score": 5 },
+        { "text": "Sí, pero sin controles o evidencias consistentes", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "¿Cuenta con CRM/Programa de lealtad (puntos, niveles, segmentación) vinculado a tickets y clientes?",
+      "options": [
+        { "text": "Sí, integrado y con segmentación activa", "score": 5 },
+        { "text": "Sí, pero básico o sin segmentación efectiva", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "¿Dispone de reportes automáticos de ventas y márgenes por categoría, tienda, vendedor y franjas horarias?",
+      "options": [
+        { "text": "Sí, con tableros y actualización periódica", "score": 5 },
+        { "text": "Sí, pero reportes manuales o esporádicos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    }
+  ]
+}

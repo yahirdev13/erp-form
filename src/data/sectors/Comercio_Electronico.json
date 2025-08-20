@@ -1,1 +1,95 @@
-{}
+{
+  "industry": "Comercio Electrónico",
+  "questions": [
+    {
+      "id": 1,
+      "text": "¿Tiene un catálogo con SKUs únicos, variantes (talla/color) y atributos estandarizados?",
+      "options": [
+        { "text": "Sí, con nomenclatura y validación consistentes", "score": 5 },
+        { "text": "Sí, pero parcial o sin estandarización completa", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "¿Sincroniza el inventario en tiempo real entre almacenes, tienda en línea y marketplaces para evitar sobreventa?",
+      "options": [
+        { "text": "Sí, centralizado y en tiempo real", "score": 5 },
+        { "text": "Sí, pero con retrasos o manualmente", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "¿Tiene definido el proceso de fulfillment (picking, packing, etiquetado) con estados de pedido y SLAs?",
+      "options": [
+        { "text": "Sí, documentado y operando de forma consistente", "score": 5 },
+        { "text": "Sí, pero parcialmente o sin SLAs claros", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "¿Genera guías y calcula tarifas de envío con integración a paqueterías y seguimiento (tracking) automático?",
+      "options": [
+        { "text": "Sí, integrado y automatizado", "score": 5 },
+        { "text": "Sí, pero manual o con integraciones limitadas", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "¿Tiene integradas pasarelas de pago con conciliación automática contra contabilidad/bancos?",
+      "options": [
+        { "text": "Sí, con conciliación y manejo de comisiones", "score": 5 },
+        { "text": "Sí, pero conciliación manual o parcial", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "¿Gestiona devoluciones/RMA con reintegros, cambios y reingreso de mercancía a inventario?",
+      "options": [
+        { "text": "Sí, con flujo definido y trazabilidad", "score": 5 },
+        { "text": "Sí, pero manual o incompleto", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "¿Opera listas de precios, promociones y cupones con reglas (segmentos, fechas, cantidades mínimas)?",
+      "options": [
+        { "text": "Sí, parametrizado y controlado por reglas", "score": 5 },
+        { "text": "Sí, pero se gestiona manualmente o con limitaciones", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "¿Cuenta con reportes de ventas y márgenes por canal, SKU y campaña de marketing?",
+      "options": [
+        { "text": "Sí, automatizados y periódicos", "score": 5 },
+        { "text": "Sí, pero se obtienen manualmente o esporádicos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "¿Administra atención al cliente (tickets/consultas) vinculando casos con pedidos y clientes?",
+      "options": [
+        { "text": "Sí, con SLA y seguimiento centralizado", "score": 5 },
+        { "text": "Sí, pero sin vinculación completa o sin SLA", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "¿Cumple con requisitos fiscales y de facturación electrónica (CFDI) integrados al flujo de ventas?",
+      "options": [
+        { "text": "Sí, automatizado e integrado con contabilidad", "score": 5 },
+        { "text": "Sí, pero con pasos manuales o fuera del sistema", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    }
+  ]
+}

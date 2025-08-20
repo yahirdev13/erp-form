@@ -1,1 +1,95 @@
-{}
+{
+  "industry": "Tecnología y Software",
+  "questions": [
+    {
+      "id": 1,
+      "text": "¿Opera un CRM con etapas definidas, pronósticos (forecast) y pipeline por producto/servicio?",
+      "options": [
+        { "text": "Sí, con forecast y seguimiento consistente", "score": 5 },
+        { "text": "Sí, pero básico o sin forecast confiable", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "¿Gestiona proyectos con metodologías (Scrum/Kanban) incluyendo tareas, sprints/roadmap y asignación de recursos?",
+      "options": [
+        { "text": "Sí, estandarizado y medido", "score": 5 },
+        { "text": "Sí, pero parcial o sin consistencia", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "¿Registra horas (timesheets) y gastos por proyecto/equipo para facturar por T&M o precio fijo?",
+      "options": [
+        { "text": "Sí, integrado y usado para facturación", "score": 5 },
+        { "text": "Sí, pero manual o sin uso para facturar", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "¿Administra contratos y suscripciones (SaaS/soporte) con renovaciones, prorrateos y métricas MRR/ARR/churn?",
+      "options": [
+        { "text": "Sí, automatizado y con métricas periódicas", "score": 5 },
+        { "text": "Sí, pero con cálculos manuales o incompletos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "¿Cuenta con mesa de ayuda (Service Desk) con SLAs/OLAs, categorización, base de conocimiento y encuestas CSAT/NPS?",
+      "options": [
+        { "text": "Sí, con SLAs medidos y mejoras continuas", "score": 5 },
+        { "text": "Sí, pero sin SLAs o métricas consistentes", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "¿Integra DevOps/CI-CD con repositorios (Git), pipelines, control de versiones y gestión de despliegues por ambiente?",
+      "options": [
+        { "text": "Sí, con pipelines automatizados y auditoría", "score": 5 },
+        { "text": "Sí, pero parcial o con pasos manuales críticos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "¿Gestiona activos y licencias de TI (hardware/software) con inventario, asignación, vencimientos y auditoría?",
+      "options": [
+        { "text": "Sí, con control por usuario/área y alertas", "score": 5 },
+        { "text": "Sí, pero básico o sin alertas/vencimientos", "score": 3 },
+        { "text": "No aplica o no", "score": 0 }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "¿Emite facturación (incl. CFDI), maneja impuestos/multimoneda y concilia cobros de pasarelas/bancos automáticamente?",
+      "options": [
+        { "text": "Sí, integrado y conciliado periódicamente", "score": 5 },
+        { "text": "Sí, pero con conciliación o timbrado manual/parcial", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "¿Calcula rentabilidad y márgenes por proyecto/cliente/línea de producto considerando costos directos e indirectos?",
+      "options": [
+        { "text": "Sí, con tableros y cierres periódicos", "score": 5 },
+        { "text": "Sí, pero con cálculos manuales o esporádicos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "¿Aplica gobierno de datos y seguridad (roles, revisiones de acceso, respaldos, bitácoras) con cumplimiento y auditoría?",
+      "options": [
+        { "text": "Sí, políticas vigentes y evidencias de auditoría", "score": 5 },
+        { "text": "Sí, pero parcial o sin evidencias consistentes", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    }
+  ]
+}

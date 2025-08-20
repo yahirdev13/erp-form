@@ -1,1 +1,95 @@
-{}
+{
+  "industry": "Hostelería y Turismo",
+  "questions": [
+    {
+      "id": 1,
+      "text": "¿Integra un channel manager para sincronizar disponibilidad, tarifas e inventario con OTAs (Booking, Airbnb, Expedia)?",
+      "options": [
+        { "text": "Sí, en tiempo real y bidireccional", "score": 5 },
+        { "text": "Sí, pero parcial o con actualizaciones manuales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "¿Opera un PMS/gestor de reservas con tipos de habitación/servicio, planes de tarifa y control de sobreventa?",
+      "options": [
+        { "text": "Sí, configurado y actualizado", "score": 5 },
+        { "text": "Sí, pero básico o desactualizado", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "¿Cuenta con motor de reservas en su sitio web con pagos en línea, políticas de cancelación y confirmaciones automáticas?",
+      "options": [
+        { "text": "Sí, totalmente integrado", "score": 5 },
+        { "text": "Sí, pero con pasos manuales o sin pagos en línea", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "¿Gestiona housekeeping y mantenimiento con órdenes, prioridades y estatus en tiempo real vinculados a la ocupación?",
+      "options": [
+        { "text": "Sí, con flujos y tableros operativos", "score": 5 },
+        { "text": "Sí, pero manual o sin visibilidad en tiempo real", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "¿Administra puntos de venta (restaurante, bar, spa, tours) con cargos a folio/habitación y control de caja?",
+      "options": [
+        { "text": "Sí, POS integrado con folios y contabilidad", "score": 5 },
+        { "text": "Sí, pero separado o con conciliación manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "¿Gestiona paquetes, actividades y tours con cupos, calendario, asignación de guías/unidades y check-in de participantes?",
+      "options": [
+        { "text": "Sí, con trazabilidad y control de capacidad", "score": 5 },
+        { "text": "Sí, pero parcial o en hojas de cálculo", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "¿Integra facturación electrónica (CFDI) y conciliación de cobros/comisiones de OTAs y pasarelas de pago?",
+      "options": [
+        { "text": "Sí, automatizado e integrado a contabilidad", "score": 5 },
+        { "text": "Sí, pero con conciliación o timbrado manual/parcial", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "¿Cuenta con CRM de huéspedes/clientes (pre-estancia, en-estancia y post-estancia) con campañas y encuestas de satisfacción?",
+      "options": [
+        { "text": "Sí, con segmentación y automatizaciones", "score": 5 },
+        { "text": "Sí, pero básico o sin automatización", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "¿Aplica revenue management (temporadas, restricciones, tarifas dinámicas por ocupación/canal) con reglas claras?",
+      "options": [
+        { "text": "Sí, con reglas y revisiones periódicas", "score": 5 },
+        { "text": "Sí, pero manual o poco consistente", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "¿Dispone de KPIs y reportes automáticos (ocupación, ADR, RevPAR, pickup, no-show, margen por canal/actividad)?",
+      "options": [
+        { "text": "Sí, con tableros y actualizaciones programadas", "score": 5 },
+        { "text": "Sí, pero reportes manuales o esporádicos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    }
+  ]
+}

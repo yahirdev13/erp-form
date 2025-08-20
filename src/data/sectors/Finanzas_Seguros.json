@@ -1,1 +1,95 @@
-{}
+{
+  "industry": "Finanzas y Seguros",
+  "questions": [
+    {
+      "id": 1,
+      "text": "¿Cumple con PLD/AML y KYC (listas de sanciones/PEP, scoring de riesgo, evidencias) integrado al alta y monitoreo de clientes?",
+      "options": [
+        { "text": "Sí, automatizado con alertas y bitácora de auditoría", "score": 5 },
+        { "text": "Sí, pero con controles manuales o parciales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "En seguros/crédito: ¿administra productos/pólizas con reglas (coberturas/tasas/deducibles), versiones y vigencias?",
+      "options": [
+        { "text": "Sí, parametrizado y con control de versiones", "score": 5 },
+        { "text": "Sí, pero con parametrización limitada o manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "¿Gestiona suscripción/underwriting con reglas de autorización, scoring y documentos soportados (expediente digital)?",
+      "options": [
+        { "text": "Sí, con flujos y niveles de aprobación", "score": 5 },
+        { "text": "Sí, pero básico o con pasos fuera del sistema", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "Para siniestros/reclamaciones: ¿lleva registro con SLAs, reservas técnicas, subrogación y recuperación de cartera?",
+      "options": [
+        { "text": "Sí, con trazabilidad y cálculos automáticos", "score": 5 },
+        { "text": "Sí, pero con cálculos o seguimiento manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "¿Administra pólizas/contratos (emisión, endosos, renovaciones, cancelaciones) con prorrateos e impacto contable automático?",
+      "options": [
+        { "text": "Sí, integrado con contabilidad y cobros", "score": 5 },
+        { "text": "Sí, pero con conciliaciones o prorrateos manuales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "¿Calcula y liquida comisiones a agentes/brokers por canal/producto con conciliación contra ventas/pólizas?",
+      "options": [
+        { "text": "Sí, con reglas y conciliación automática", "score": 5 },
+        { "text": "Sí, pero con cálculo o conciliación manual/parcial", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "¿Emite facturación/CFDI y gestiona cobranza (débitos, pasarelas, domiciliación) con conciliación bancaria automática y moras?",
+      "options": [
+        { "text": "Sí, integrado y con recordatorios/recargos", "score": 5 },
+        { "text": "Sí, pero conciliación o recordatorios manuales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "¿Cumple con reportes regulatorios y contabilidad (NIIF/IFRS, catálogos y pólizas automáticas) para CNBV/CNSF/SHCP según aplique?",
+      "options": [
+        { "text": "Sí, con reportes y cierres periódicos automáticos", "score": 5 },
+        { "text": "Sí, pero con generación manual o incompleta", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "¿Opera multimoneda/multipaís con tipos de cambio, valuación y conciliaciones por entidad/centro de beneficio?",
+      "options": [
+        { "text": "Sí, parametrizado y con revaluaciones automáticas", "score": 5 },
+        { "text": "Sí, pero con revaluaciones o conciliaciones manuales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "¿Tiene gobierno de datos y seguridad (SoD, roles, logs, cifrado, retención) y KPIs como loss ratio/combined ratio/cartera vencida?",
+      "options": [
+        { "text": "Sí, con políticas vigentes y tableros automáticos", "score": 5 },
+        { "text": "Sí, pero controles o KPIs parciales/manuales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    }
+  ]
+}
