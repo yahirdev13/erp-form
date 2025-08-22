@@ -1,0 +1,95 @@
+{
+  "industry": "Salud y Farmacéutica",
+  "questions": [
+    {
+      "id": 1,
+      "text": "¿Cumple con GxP/GMP y requisitos de COFEPRIS con SOPs/documentos controlados y versionados?",
+      "options": [
+        { "text": "Sí, con auditorías y registros digitales", "score": 5 },
+        { "text": "Sí, pero parcial o con control manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "¿Garantiza trazabilidad por lote/serie desde recepción hasta producción/dispensación y puede ejecutar recalls?",
+      "options": [
+        { "text": "Sí, completa y con simulacros de recall", "score": 5 },
+        { "text": "Sí, pero parcial o sin pruebas de recall", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "¿Controla caducidades aplicando FEFO/FIFO y bloqueos por productos próximos a vencer?",
+      "options": [
+        { "text": "Sí, automático y en tiempo real", "score": 5 },
+        { "text": "Sí, pero con controles manuales o esporádicos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "¿Monitorea cadena de frío/temperaturas (almacenaje y transporte) con bitácoras y alertas ante desviaciones?",
+      "options": [
+        { "text": "Sí, con sensores y alertas registradas", "score": 5 },
+        { "text": "Sí, pero con registros manuales o sin alertas", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "¿Ejecuta control de calidad (recepción, proceso, liberación) con COA, no conformidades y CAPA?",
+      "options": [
+        { "text": "Sí, con planes de control y trazabilidad", "score": 5 },
+        { "text": "Sí, pero parcial o sin CAPA formal", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "¿Gestiona sustancias controladas con doble autorización, conteos cíclicos y bitácora/audit trail?",
+      "options": [
+        { "text": "Sí, con segregación y auditoría completa", "score": 5 },
+        { "text": "Sí, pero con controles manuales o incompletos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "¿Homologa y evalúa proveedores/insumos con documentación sanitaria (registros, COFEPRIS, COA) y vigencias?",
+      "options": [
+        { "text": "Sí, con evaluaciones y alertas de vencimiento", "score": 5 },
+        { "text": "Sí, pero sin control de vigencias o parcial", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "¿Mantiene mantenimiento y calibración de equipos médicos/laboratorio con certificados y planes programados?",
+      "options": [
+        { "text": "Sí, con calendario, OT y evidencia digital", "score": 5 },
+        { "text": "Sí, pero básico o sin evidencias consistentes", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "En clínicas/farmacias: ¿gestiona agenda, recursos (consultorios/equipo), historias clínicas/recetas y dispensación vinculada?",
+      "options": [
+        { "text": "Sí, integrado y con flujos definidos", "score": 5 },
+        { "text": "Sí, pero parcial o con pasos manuales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "¿Integra facturación (CFDI), cobros y reclamaciones a aseguradoras con conciliación contable/bancaria?",
+      "options": [
+        { "text": "Sí, automatizado y conciliado periódicamente", "score": 5 },
+        { "text": "Sí, pero con conciliación manual o incompleta", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    }
+  ]
+}

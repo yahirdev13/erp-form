@@ -1,0 +1,95 @@
+{
+  "industry": "Educación",
+  "questions": [
+    {
+      "id": 1,
+      "text": "¿Cuenta con un sistema para la gestión de matrículas y alumnos?",
+      "options": [
+        { "text": "Sí, totalmente integrado", "score": 5 },
+        { "text": "Sí, pero parcial o manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "¿Gestiona de forma digital los horarios de clases y asignaciones de docentes?",
+      "options": [
+        { "text": "Sí, de forma automatizada", "score": 5 },
+        { "text": "Sí, pero manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "¿Cuenta con un portal para que alumnos o padres consulten calificaciones y pagos?",
+      "options": [
+        { "text": "Sí, con acceso en tiempo real", "score": 5 },
+        { "text": "Sí, pero limitado", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "¿Registra y controla digitalmente la asistencia de alumnos y personal?",
+      "options": [
+        { "text": "Sí, con reportes automáticos", "score": 5 },
+        { "text": "Sí, pero manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "¿Cuenta con reportes para analizar el rendimiento académico y financiero?",
+      "options": [
+        { "text": "Sí, automatizado", "score": 5 },
+        { "text": "Sí, pero manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "¿Tiene un sistema para control y gestión de pagos de colegiaturas o mensualidades?",
+      "options": [
+        { "text": "Sí, con control automatizado", "score": 5 },
+        { "text": "Sí, pero manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "¿Gestiona digitalmente el inventario de material escolar y equipo educativo?",
+      "options": [
+        { "text": "Sí, en tiempo real", "score": 5 },
+        { "text": "Sí, pero no en tiempo real", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "¿Cuenta con herramientas para la comunicación digital entre docentes, alumnos y padres?",
+      "options": [
+        { "text": "Sí, integradas al sistema principal", "score": 5 },
+        { "text": "Sí, pero independientes", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "¿Ofrece acceso a materiales y recursos educativos en línea?",
+      "options": [
+        { "text": "Sí, en una plataforma centralizada", "score": 5 },
+        { "text": "Sí, pero en repositorios dispersos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "¿Realiza seguimiento digital al avance académico de los estudiantes?",
+      "options": [
+        { "text": "Sí, con reportes automatizados", "score": 5 },
+        { "text": "Sí, pero manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    }
+  ]
+}

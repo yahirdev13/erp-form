@@ -1,0 +1,95 @@
+{
+  "industry": "Energía",
+  "questions": [
+    {
+      "id": 1,
+      "text": "¿Gestiona activos críticos (plantas, subestaciones, pozos, parques solares/eólicos) con jerarquías, criticidad y costos asociados?",
+      "options": [
+        { "text": "Sí, con árbol de activos, criticidad y costeo por activo", "score": 5 },
+        { "text": "Sí, pero básico o sin criticidad/costeo", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "¿Ejecuta mantenimiento preventivo/predictivo con órdenes de trabajo, medidores (horas/arranques) y control de repuestos?",
+      "options": [
+        { "text": "Sí, con planes, medidores y repuestos integrados", "score": 5 },
+        { "text": "Sí, pero parcial o con pasos manuales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "¿Integra señales/lecturas desde SCADA/EMS/DCS/AMI para registrar producción/consumo, alarmas y eventos operativos?",
+      "options": [
+        { "text": "Sí, integración automática y bidireccional", "score": 5 },
+        { "text": "Sí, pero exportación/importación manual o limitada", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "¿Controla cumplimiento regulatorio (CRE/ASEA/SEMARNAT/NOM) con vigencias, evidencias y bitácora de auditoría?",
+      "options": [
+        { "text": "Sí, con alertas de vencimiento y auditoría completa", "score": 5 },
+        { "text": "Sí, pero con controles manuales o incompletos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "Para generación: ¿registra combustibles/insumos energéticos (gas/diésel/biomasa) con conciliación contra energía generada y rendimientos (heat rate)?",
+      "options": [
+        { "text": "Sí, con conciliación automática y KPIs de rendimiento", "score": 5 },
+        { "text": "Sí, pero con cálculos manuales o parciales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "¿Administra contratos y liquidaciones de energía (PPA/tarifas/peajes) con facturación por medidor/nodo/hora y multimoneda?",
+      "options": [
+        { "text": "Sí, parametrizado y con liquidación automática", "score": 5 },
+        { "text": "Sí, pero con prorrateos o cálculos manuales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "¿Planifica demanda/generación y despacho con restricciones de capacidad, indisponibilidades y calendario de paros programados?",
+      "options": [
+        { "text": "Sí, con forecast y escenarios de capacidad", "score": 5 },
+        { "text": "Sí, pero sin escenarios o con calendario manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "En distribución/servicio de campo: ¿gestiona interrupciones (outages), cuadrillas móviles, SLA y confirmación de trabajo en sitio?",
+      "options": [
+        { "text": "Sí, con despacho en tiempo real y trazabilidad", "score": 5 },
+        { "text": "Sí, pero con registro manual o sin SLA consistente", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "¿Opera seguridad industrial y HSE (incidentes, permisos de trabajo, LOTO, capacitaciones) con CAPA y evidencias?",
+      "options": [
+        { "text": "Sí, con flujos y auditoría de acciones correctivas", "score": 5 },
+        { "text": "Sí, pero registros parciales o sin CAPA formal", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "¿Monitorea KPIs automáticos (disponibilidad, factor de planta, SAIDI/SAIFI, pérdidas técnicas/no técnicas, márgenes) con tableros periódicos?",
+      "options": [
+        { "text": "Sí, con tableros y alertas programadas", "score": 5 },
+        { "text": "Sí, pero reportes manuales o esporádicos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    }
+  ]
+}

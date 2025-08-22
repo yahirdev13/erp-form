@@ -1,0 +1,50 @@
+{
+  "industry": "General",
+  "questions": [
+    {
+      "id": 1,
+      "text": "¿Cuenta con registro digital de ventas y compras?",
+      "options": [
+        { "text": "Sí, 100% digital", "score": 5 },
+        { "text": "Parcialmente digital", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "¿Tiene un responsable de sistemas o TI?",
+      "options": [
+        { "text": "Sí", "score": 5 },
+        { "text": "No, pero se contrata externo", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "¿Se realiza seguimiento a métricas clave (KPIs) de la empresa?",
+      "options": [
+        { "text": "Sí, en tiempo real", "score": 5 },
+        { "text": "Sí, pero no en tiempo real", "score": 3 },
+        { "text": "No se miden", "score": 0 }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "¿Se tiene control financiero (cobros, pagos, flujo de caja)?",
+      "options": [
+        { "text": "Sí, automatizado", "score": 5 },
+        { "text": "Sí, pero manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "¿Cuenta con un inventario actualizado de productos o servicios?",
+      "options": [
+        { "text": "Sí, actualizado en tiempo real", "score": 5 },
+        { "text": "Sí, pero no en tiempo real", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    }
+  ]
+}

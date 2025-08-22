@@ -1,0 +1,95 @@
+{
+  "industry": "Distribución y Logística",
+  "questions": [
+    {
+      "id": 1,
+      "text": "¿Mantiene inventario en tiempo real por almacén, ubicación (bin) y con conteos cíclicos programados?",
+      "options": [
+        { "text": "Sí, con ubicaciones y programa de conteos cíclicos", "score": 5 },
+        { "text": "Sí, pero solo por almacén o conteos esporádicos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "¿Opera estrategias de picking (wave/batch/zone) con códigos de barras o RFID?",
+      "options": [
+        { "text": "Sí, con estrategias definidas e identificación por código/RFID", "score": 5 },
+        { "text": "Sí, pero picking básico o sin estandarización", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "¿Planifica rutas y despachos con un TMS integrado (capacidad, ventanas de entrega, GPS/tracking)?",
+      "options": [
+        { "text": "Sí, con planificación y monitoreo en tiempo real", "score": 5 },
+        { "text": "Sí, pero parcial o con seguimiento manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "¿Gestiona cross-docking y transferencias entre almacenes con trazabilidad completa?",
+      "options": [
+        { "text": "Sí, con flujos definidos y trazabilidad punta a punta", "score": 5 },
+        { "text": "Sí, pero de forma manual o parcial", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "¿Integra EDI/API con clientes, proveedores y paqueterías (órdenes, etiquetas/guías y estatus)?",
+      "options": [
+        { "text": "Sí, integraciones automáticas bidireccionales", "score": 5 },
+        { "text": "Sí, pero limitadas o con carga manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "¿Captura comprobante de entrega (POD) digital con firma/foto y geolocalización?",
+      "options": [
+        { "text": "Sí, con registro digital y validaciones", "score": 5 },
+        { "text": "Sí, pero sin evidencia completa o no digital", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "¿Gestiona lotes/series, fechas de caducidad y reglas FIFO/FEFO en almacenamiento y picking?",
+      "options": [
+        { "text": "Sí, con control de vencimientos y reglas aplicadas", "score": 5 },
+        { "text": "Sí, pero sin aplicación consistente", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "¿Monitorea KPIs logísticos (OTIF, fill rate, lead time, exactitud de inventario) contra SLAs?",
+      "options": [
+        { "text": "Sí, con tableros y alertas automáticas", "score": 5 },
+        { "text": "Sí, pero reportes manuales o esporádicos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "¿Gestiona devoluciones y logística inversa con clasificación, reacondicionamiento y reingreso a inventario?",
+      "options": [
+        { "text": "Sí, con flujo definido y trazabilidad", "score": 5 },
+        { "text": "Sí, pero de forma parcial o manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "¿Calcula costos de transporte y almacenaje por pedido/cliente para analizar rentabilidad?",
+      "options": [
+        { "text": "Sí, con prorrateos y análisis de márgenes", "score": 5 },
+        { "text": "Sí, pero con cálculos manuales o aproximados", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    }
+  ]
+}

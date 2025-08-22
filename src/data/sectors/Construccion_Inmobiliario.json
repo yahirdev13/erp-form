@@ -1,0 +1,95 @@
+{
+  "industry": "Construcción e Inmobiliario",
+  "questions": [
+    {
+      "id": 1,
+      "text": "¿Estructura sus proyectos con WBS/fases, hitos y responsables definidos?",
+      "options": [
+        { "text": "Sí, formal y vigente en todos los proyectos", "score": 5 },
+        { "text": "Sí, pero parcial o desactualizado", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "¿Controla presupuesto vs. costo real por obra/partida con centros de costo?",
+      "options": [
+        { "text": "Sí, con seguimiento periódico y desvíos", "score": 5 },
+        { "text": "Sí, pero con hojas de cálculo o sin detalle por partida", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "¿Gestiona órdenes de cambio (alcance, precio, plazo) con autorizaciones y trazabilidad?",
+      "options": [
+        { "text": "Sí, con flujo de aprobación y control de impactos", "score": 5 },
+        { "text": "Sí, pero sin aprobaciones formales o registro incompleto", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "¿Registra avance físico y financiero (estimaciones/valuaciones) y genera facturación por hitos?",
+      "options": [
+        { "text": "Sí, integrado a contratos y contabilidad", "score": 5 },
+        { "text": "Sí, pero con cálculos manuales o fuera del sistema", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "¿Administra compras y subcontratos con comparativos, OCs, retenciones y vencimientos de fianzas?",
+      "options": [
+        { "text": "Sí, con contratos, hitos y penalizaciones", "score": 5 },
+        { "text": "Sí, pero sin comparativos o control de retenciones/fianzas", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "¿Controla almacenes de obra, materiales y herramientas por ubicación, lote y conteos cíclicos?",
+      "options": [
+        { "text": "Sí, en tiempo real y con trazabilidad", "score": 5 },
+        { "text": "Sí, pero global o con registros manuales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "¿Gestiona maquinaria/equipo (asignación, horas máquina, combustible, mantenimiento preventivo/correctivo)?",
+      "options": [
+        { "text": "Sí, con OT, calendarios y costos imputados a obra", "score": 5 },
+        { "text": "Sí, pero sin costos imputados o sin plan de mantenimiento", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "¿Implementa calidad y seguridad (checklists, incidentes/NCR, CAPA) con evidencias en obra?",
+      "options": [
+        { "text": "Sí, con registros digitales y responsables", "score": 5 },
+        { "text": "Sí, pero parcial o sin evidencias consistentes", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "¿Registra asistencia/tiempos de cuadrillas y destajos por obra con integración a nómina?",
+      "options": [
+        { "text": "Sí, con partes diarios y geolocalización/opcional", "score": 5 },
+        { "text": "Sí, pero con captura manual o sin integración a nómina", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "En la parte inmobiliaria: ¿gestiona cartera de propiedades (venta/renta), contratos, CRM y cobranza?",
+      "options": [
+        { "text": "Sí, integrado con facturación/CFDI y contabilidad", "score": 5 },
+        { "text": "Sí, pero con procesos separados o manuales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "industry": "Agricultura y Agroindustria",
+  "questions": [
+    {
+      "id": 1,
+      "text": "¿Planifica siembra y cosecha por cultivo/parcela con calendarios, metas de rendimiento y disponibilidad de recursos?",
+      "options": [
+        { "text": "Sí, parametrizado y actualizado por campaña", "score": 5 },
+        { "text": "Sí, pero parcial o en hojas de cálculo", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "¿Controla inventario de insumos (semillas, fertilizantes, agroquímicos) por lote/caducidad y ubicación?",
+      "options": [
+        { "text": "Sí, en tiempo real con FEFO y trazabilidad", "score": 5 },
+        { "text": "Sí, pero con registros manuales o sin FEFO", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "¿Registra aplicaciones y labores agrícolas (siembra, riego, fertilización, fumigación) con costos por hectárea/lote?",
+      "options": [
+        { "text": "Sí, con órdenes de trabajo y costeo integrado", "score": 5 },
+        { "text": "Sí, pero sin costeo completo o no estandarizado", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "¿Garantiza trazabilidad por lote desde el campo hasta el cliente/producto terminado (ascendente y descendente)?",
+      "options": [
+        { "text": "Sí, completa en todas las etapas", "score": 5 },
+        { "text": "Sí, pero parcial o con brechas en el flujo", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "¿Cumple con programas de calidad e inocuidad (GAP/HACCP/POES) con checklists, no conformidades y CAPA?",
+      "options": [
+        { "text": "Sí, digital y con auditorías documentadas", "score": 5 },
+        { "text": "Sí, pero con registros manuales o incompletos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "¿Gestiona recepción de cosecha y proceso agroindustrial (rendimientos, mermas, subproductos) con pesaje y calidad?",
+      "options": [
+        { "text": "Sí, integrado con inventario y costos", "score": 5 },
+        { "text": "Sí, pero sin rendimientos/mermas confiables", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "¿Lleva mantenimiento de maquinaria/equipos (tractores, bombas, cámaras frías) con horas máquina y OT preventivas?",
+      "options": [
+        { "text": "Sí, con planes, historiales y repuestos", "score": 5 },
+        { "text": "Sí, pero básico o reactivo sin historial completo", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "¿Monitorea condiciones críticas (riego, humedad, temperatura/cadena de frío) y genera alertas ante desviaciones?",
+      "options": [
+        { "text": "Sí, con sensores/IoT y alertas registradas", "score": 5 },
+        { "text": "Sí, pero con lecturas manuales o sin alertas", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "¿Gestiona contratos/liquidaciones con productores y proveedores (kilos, calidades, precios y deducciones)?",
+      "options": [
+        { "text": "Sí, con reglas y conciliación automatizada", "score": 5 },
+        { "text": "Sí, pero con cálculos manuales o parciales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "¿Dispone de KPIs y reportes de rentabilidad por cultivo, lote, campaña y canal de venta?",
+      "options": [
+        { "text": "Sí, con tableros automáticos y periódicos", "score": 5 },
+        { "text": "Sí, pero reportes manuales o esporádicos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    }
+  ]
+}

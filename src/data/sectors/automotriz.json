@@ -1,0 +1,95 @@
+{
+  "industry": "Automotriz",
+  "questions": [
+    {
+      "id": 1,
+      "text": "¿Cuenta con un sistema para seguimiento de órdenes de servicio?",
+      "options": [
+        { "text": "Sí, integrado al inventario y facturación", "score": 5 },
+        { "text": "Sí, pero manual o separado", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "¿Registra digitalmente el historial de mantenimiento de vehículos?",
+      "options": [
+        { "text": "Sí, completamente", "score": 5 },
+        { "text": "Parcialmente", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "¿Controla digitalmente el inventario de refacciones?",
+      "options": [
+        { "text": "Sí, en tiempo real", "score": 5 },
+        { "text": "Sí, pero no en tiempo real", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "¿Gestiona citas y disponibilidad de técnicos en línea?",
+      "options": [
+        { "text": "Sí, en tiempo real", "score": 5 },
+        { "text": "Sí, pero manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "¿Cuenta con reportes de ventas por modelo de vehículo o servicio?",
+      "options": [
+        { "text": "Sí, automatizado", "score": 5 },
+        { "text": "Sí, pero manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "¿Tiene control digital de garantías y reclamaciones de clientes?",
+      "options": [
+        { "text": "Sí, con seguimiento automatizado", "score": 5 },
+        { "text": "Sí, pero parcial", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "¿Gestiona digitalmente las órdenes de compra de refacciones a proveedores?",
+      "options": [
+        { "text": "Sí, integrado con inventario y facturación", "score": 5 },
+        { "text": "Sí, pero manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "¿Cuenta con reportes automáticos de productividad de técnicos y mecánicos?",
+      "options": [
+        { "text": "Sí, en tiempo real", "score": 5 },
+        { "text": "Sí, pero no en tiempo real", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "¿Realiza seguimiento digital a cotizaciones enviadas a clientes?",
+      "options": [
+        { "text": "Sí, con alertas y recordatorios", "score": 5 },
+        { "text": "Sí, pero manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "¿Tiene un sistema para analizar márgenes de ganancia por tipo de servicio o producto?",
+      "options": [
+        { "text": "Sí, automatizado", "score": 5 },
+        { "text": "Sí, pero manual", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    }
+  ]
+}

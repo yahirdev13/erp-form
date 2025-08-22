@@ -1,0 +1,95 @@
+{
+  "industry": "Servicios Profesionales",
+  "questions": [
+    {
+      "id": 1,
+      "text": "¿Opera un CRM con etapas del ciclo de ventas, probabilidad/forecast y seguimiento de propuestas por servicio?",
+      "options": [
+        { "text": "Sí, con forecast y pipeline estandarizado", "score": 5 },
+        { "text": "Sí, pero básico o sin forecast confiable", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "¿Gestiona proyectos con estructura (tareas, hitos, entregables) y responsables definidos?",
+      "options": [
+        { "text": "Sí, estandarizado y actualizado", "score": 5 },
+        { "text": "Sí, pero parcial o sin hitos claros", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "¿Registra horas (timesheets) por tarea/proyecto con flujo de aprobación y políticas de tarifa por rol?",
+      "options": [
+        { "text": "Sí, con aprobaciones y tarifas configuradas", "score": 5 },
+        { "text": "Sí, pero sin aprobación o sin tarifas por rol", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "Para facturación: ¿maneja T&M, precio fijo, por hitos y/o retainer con generación automática de facturas?",
+      "options": [
+        { "text": "Sí, integra todos o la mayoría de los esquemas", "score": 5 },
+        { "text": "Sí, pero con pasos manuales o solo un esquema", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "¿Controla gastos/viáticos (anticipos, comprobación, reembolsos) imputados al proyecto y aprobados por flujo?",
+      "options": [
+        { "text": "Sí, con políticas y evidencia digital", "score": 5 },
+        { "text": "Sí, pero con control manual o sin políticas", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "¿Administra contratos/órdenes de servicio con vigencias, renovaciones, SLAs y alcance pactado?",
+      "options": [
+        { "text": "Sí, con alertas de vencimiento y control de cambios", "score": 5 },
+        { "text": "Sí, pero sin alertas o sin control de cambios", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "¿Planifica capacidad y asignación de recursos (utilización, carga vs. disponibilidad) por consultor/equipo?",
+      "options": [
+        { "text": "Sí, con tableros de utilización y proyecciones", "score": 5 },
+        { "text": "Sí, pero de forma manual o parcial", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "Si subcontrata: ¿gestiona compras a terceros con comparativos, órdenes, recepción y control de costos al proyecto?",
+      "options": [
+        { "text": "Sí, integrado al proyecto y contabilidad", "score": 5 },
+        { "text": "Sí, pero con registros manuales o sin comparativos", "score": 3 },
+        { "text": "No aplica o no", "score": 0 }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "¿Centraliza documentos (propuestas, NDAs, actas, entregables) con control de versiones y firmas electrónicas?",
+      "options": [
+        { "text": "Sí, con repositorio por cliente/proyecto", "score": 5 },
+        { "text": "Sí, pero sin versiones o sin firmas digitales", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "¿Monitorea KPIs y rentabilidad (utilización, WIP, margen por proyecto/cliente, cobro vs. facturación, CSAT/NPS)?",
+      "options": [
+        { "text": "Sí, con tableros y cierres periódicos", "score": 5 },
+        { "text": "Sí, pero reportes manuales o esporádicos", "score": 3 },
+        { "text": "No", "score": 0 }
+      ]
+    }
+  ]
+}
