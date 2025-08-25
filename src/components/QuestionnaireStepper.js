@@ -19,6 +19,9 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import Autocomplete from "@mui/material/Autocomplete";
 import Divider from "@mui/material/Divider";
+import LinearProgress from "@mui/material/LinearProgress";
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
 
 import StepperWrapper from "./Stepper";
 
@@ -65,13 +68,18 @@ const industries = [
 // 3–5 preguntas generales (transversales)
 import generalData from "../data/general.json";
 
-const generalQuestions = (generalData.questions || []).map((q) => ({
-  key: q.id || q.text,
+// Conserva ambos: uno para UI (simplificado) y otro “raw” con los scores
+const generalQuestionsUI = (generalData.questions || []).map((q) => ({
+  key: q.id ?? q.text,
   text: q.text,
-  options: q.options.map((opt) => (typeof opt === "string" ? opt : opt.text)),
+  // Para UI basta el texto. Si trae objetos, muestro el .text:
+  options: (q.options || []).map((opt) =>
+    typeof opt === "string" ? opt : opt.text
+  ),
 }));
+const generalQuestionsRAW = generalData.questions || [];
 
-// Carga estática de JSONs por sector (coloca los archivos en src/data/sectores/*.json)
+// Carga estática de JSONs por sector (coloca los archivos en src/data/sectors/*.json)
 const slugify = (s) =>
   s
     .toLowerCase()
@@ -114,7 +122,73 @@ const SECTOR_FILE_BY_INDUSTRY = {
   "Energía y Utilities": "energia",
 };
 
-// --- Helper para pintar cada pregunta del paso 2 con layout uniforme ---
+// -------- Config de scoring (intenta cargar archivo, si no, usa defaults) -----
+const DEFAULT_SCORING = {
+  weights: { general: 0.4, sector: 0.6 }, // ponderación
+  thresholds: { mature: 0.75, almost: 0.55 }, // 75% y 55%
+  // Si no hay score en las opciones, se usa este mapeo heurístico:
+  fallbackScores: [
+    { match: /sí|si/i, score: 5 },
+    { match: /parcial|manual/i, score: 3 },
+    { match: /no/i, score: 0 },
+  ],
+};
+
+let SCORING = DEFAULT_SCORING;
+try {
+  // Opcional: crea src/data/scoring.json para sobreescribir
+  // { "weights": { "general": 0.5, "sector": 0.5 }, "thresholds": { "mature": 0.8, "almost": 0.6 } }
+  // Nota: No rompas el build si no existe.
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const cfg = require("../data/scoring.json");
+  SCORING = { ...DEFAULT_SCORING, ...cfg };
+} catch (_e) {
+  // usa defaults
+}
+
+// --------------- Helpers de scoring ----------------
+const getOptionScore = (answerValue, options) => {
+  if (!options || options.length === 0) return 0;
+  // Si hay score explícito:
+  const foundObj = options.find(
+    (opt) =>
+      typeof opt === "object" &&
+      (opt.text === answerValue || opt.value === answerValue)
+  );
+  if (foundObj && typeof foundObj.score === "number") return foundObj.score;
+
+  // Si son strings o no traen score: usa fallback
+  const asText = String(answerValue ?? "").trim();
+  for (const rule of SCORING.fallbackScores) {
+    if (rule.match.test(asText)) return rule.score;
+  }
+  // Último recurso: asigna 0
+  return 0;
+};
+
+const getMaxScoreFromOptions = (options) => {
+  if (!options || options.length === 0) return 0;
+  // Si hay scores explícitos
+  const withScores = options.filter(
+    (o) => typeof o === "object" && typeof o.score === "number"
+  );
+  if (withScores.length > 0) {
+    return Math.max(...withScores.map((o) => o.score));
+  }
+  // Fallback: asume el máximo de la heurística es 5
+  return 5;
+};
+
+const findGeneralRawByKey = (key) => {
+  // Empareja por id o por texto
+  return (
+    generalQuestionsRAW.find((q) => q.id === key) ||
+    generalQuestionsRAW.find((q) => q.text === key) ||
+    null
+  );
+};
+
+// --- Helper para pintar cada pregunta (UI) ---
 function QuestionItem({ label, options, value, onChange, error }) {
   return (
     <Card elevation={3} sx={{ mb: 4, px: 3, py: 2, borderRadius: 3 }}>
@@ -191,15 +265,16 @@ function QuestionItem({ label, options, value, onChange, error }) {
     </Card>
   );
 }
+
 export default function QuestionnaireStepper() {
   const [activeStep, setActiveStep] = useState(0);
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [sectorQuestions, setSectorQuestions] = useState([]);
   const [sectorAnswers, setSectorAnswers] = useState({});
-  const [generalAnswers, setGeneralAnswers] = useState({}); // Add missing state for generalAnswers
-  const [sectorPage, setSectorPage] = useState(0); // For paginating sectorial questions
-  const [direction, setDirection] = useState("left"); // Slide direction for transitions
+  const [generalAnswers, setGeneralAnswers] = useState({});
+  const [sectorPage, setSectorPage] = useState(0);
+  const [direction, setDirection] = useState("left");
   const prevStepRef = useRef(activeStep);
 
   const handleChange = (field) => (e, valueFromAuto) => {
@@ -245,18 +320,8 @@ export default function QuestionnaireStepper() {
 
   const validateStep2 = () => {
     const er = {};
-    generalQuestions.forEach((q) => {
+    generalQuestionsUI.forEach((q) => {
       if (!generalAnswers[q.key]) er[`g_${q.key}`] = "Requerido.";
-    });
-    setErrors(er);
-    return Object.keys(er).length === 0;
-  };
-
-  const validateStep3 = () => {
-    const er = {};
-    sectorQuestions.forEach((q, idx) => {
-      const key = typeof q === "string" ? `s_${idx}` : q.key || `s_${idx}`;
-      if (!sectorAnswers[key]) er[key] = "Requerido.";
     });
     setErrors(er);
     return Object.keys(er).length === 0;
@@ -277,14 +342,23 @@ export default function QuestionnaireStepper() {
       ? data
       : data?.preguntas || data?.questions || [];
     setSectorQuestions(list);
-    setSectorPage(0); // Reset to first page when loading new questions
+    setSectorPage(0);
   }, [activeStep, form.industry]);
+
+  const validateStep3 = () => {
+    const er = {};
+    sectorQuestions.forEach((q, idx) => {
+      const key = typeof q === "string" ? `s_${idx}` : q.key || `s_${idx}`;
+      if (!sectorAnswers[key]) er[key] = "Requerido.";
+    });
+    setErrors(er);
+    return Object.keys(er).length === 0;
+  };
 
   const handleNext = () => {
     if (activeStep === 0 && !validateStep0()) return;
     if (activeStep === 1 && !validateStep1()) return;
     if (activeStep === 2 && !validateStep2()) return;
-    // Sectorial pagination logic using main navigation
     if (activeStep === 3) {
       const pageSize = 5;
       const startIdx = sectorPage * pageSize;
@@ -292,17 +366,16 @@ export default function QuestionnaireStepper() {
       const er = {};
       for (let idx = startIdx; idx < endIdx; idx++) {
         const q = sectorQuestions[idx];
-        const key = typeof q === "string" ? `s_${idx}` : q.key || q.id || `s_${idx}`;
+        const key =
+          typeof q === "string" ? `s_${idx}` : q.key || q.id || `s_${idx}`;
         if (!sectorAnswers[key]) er[key] = "Requerido.";
       }
       setErrors(er);
       if (Object.keys(er).length > 0) return;
-      // If more pages, go to next page
       if (endIdx < sectorQuestions.length) {
         setSectorPage((p) => p + 1);
         return;
       }
-      // If last page, advance to results
       if (activeStep < TOTAL_STEPS - 1) {
         setDirection("left");
         setActiveStep((s) => s + 1);
@@ -321,15 +394,84 @@ export default function QuestionnaireStepper() {
       return;
     }
     if (activeStep > 0) {
-      // If in sectorial step and on first page, go back to previous step
       setDirection("right");
       setActiveStep((s) => s - 1);
-      // Reset sectorPage if leaving sectorial step
-      if (activeStep === 3) {
-        setSectorPage(0);
-      }
+      if (activeStep === 3) setSectorPage(0);
     }
   };
+
+  // ------------------- CÁLCULO DE PUNTAJES -------------------
+  const computeScores = useMemo(() => {
+    // General
+    let generalScore = 0;
+    let generalMax = 0;
+    let generalBreakdown = []; // [{label, got, max}]
+    for (const qUI of generalQuestionsUI) {
+      const raw = findGeneralRawByKey(qUI.key);
+      const opts = raw?.options ?? qUI.options ?? ["Sí", "No"];
+      const ans = generalAnswers[qUI.key];
+      const got = getOptionScore(ans, raw?.options ?? []);
+      const max = getMaxScoreFromOptions(opts);
+      generalScore += got;
+      generalMax += max;
+      generalBreakdown.push({ label: qUI.text, got, max });
+    }
+
+    // Sector
+    let sectorScore = 0;
+    let sectorMax = 0;
+    let sectorBreakdown = [];
+    sectorQuestions.forEach((q, idx) => {
+      const isString = typeof q === "string";
+      const key = isString ? `s_${idx}` : q.key || q.id || `s_${idx}`;
+      const label = isString
+        ? q
+        : q.text || q.pregunta || `Pregunta ${idx + 1}`;
+      const opts = isString ? ["Sí", "No"] : q.options || ["Sí", "No"];
+      const ans = sectorAnswers[key];
+      const got = getOptionScore(ans, q?.options ?? []);
+      const max = getMaxScoreFromOptions(opts);
+      sectorScore += got;
+      sectorMax += max;
+      sectorBreakdown.push({ label, got, max });
+    });
+
+    const pctGeneral = generalMax ? generalScore / generalMax : 0;
+    const pctSector = sectorMax ? sectorScore / sectorMax : 0;
+
+    const weighted =
+      pctGeneral * (SCORING.weights.general ?? 0.4) +
+      pctSector * (SCORING.weights.sector ?? 0.6);
+
+    // Etiqueta de madurez
+    let maturity = { label: "Aún no", color: "error" };
+    if (weighted >= (SCORING.thresholds.mature ?? 0.75)) {
+      maturity = { label: "Madura", color: "success" };
+    } else if (weighted >= (SCORING.thresholds.almost ?? 0.55)) {
+      maturity = { label: "Casi lista", color: "warning" };
+    }
+
+    // Detectar áreas débiles (Top 4 con menor % relativo)
+    const allBreakdown = [...generalBreakdown, ...sectorBreakdown]
+      .filter((b) => b.max > 0)
+      .map((b) => ({ ...b, pct: b.got / b.max }))
+      .sort((a, b) => a.pct - b.pct)
+      .slice(0, 4);
+
+    return {
+      generalScore,
+      generalMax,
+      sectorScore,
+      sectorMax,
+      pctGeneral,
+      pctSector,
+      weighted,
+      maturity,
+      weakAreas: allBreakdown,
+    };
+  }, [generalAnswers, sectorAnswers, sectorQuestions]);
+
+  // ------------------- UI: Pasos -------------------
 
   // Paso 0 — datos generales
   const renderStep0 = () => (
@@ -433,7 +575,7 @@ export default function QuestionnaireStepper() {
     </Box>
   );
 
-  // Paso 1 — industria (campo grande y centrado)
+  // Paso 1 — industria
   const renderStep1 = () => (
     <Box sx={{ maxWidth: 980, mx: "auto" }}>
       <Grid container spacing={3} justifyContent="center" alignItems="center">
@@ -454,11 +596,9 @@ export default function QuestionnaireStepper() {
               align="center"
               sx={{ mt: 0.5 }}
             >
-              <b>Es importante seleccionar correctamente la industria</b> para
-              adaptar el diagnóstico, priorizar módulos y proponer flujos
-              acordes a tu operación (por ejemplo: inventarios en Manufactura,
-              POS en Retail o e‑commerce B2C/B2B). Esto mejora la precisión de
-              la evaluación y la calidad de las recomendaciones.
+              <b>Selecciona correctamente la industria</b> para adaptar el
+              diagnóstico, priorizar módulos y proponer flujos acordes a tu
+              operación.
             </Typography>
             <Divider sx={{ mt: 2, width: "100%" }} />
           </Box>
@@ -476,13 +616,7 @@ export default function QuestionnaireStepper() {
           >
             <Box
               sx={{
-                width: {
-                  xs: "100%",
-                  sm: "100%",
-                  md: "95%",
-                  lg: "90%",
-                  xl: "80%",
-                },
+                width: { xs: "100%", md: "95%", lg: "90%", xl: "80%" },
                 maxWidth: 700,
                 mx: "auto",
               }}
@@ -520,8 +654,46 @@ export default function QuestionnaireStepper() {
     </Box>
   );
 
-  // Paso 2 — alineación corregida (dos columnas fijas)
-  const renderStep2 = () => {
+  // Paso 2 — transversal
+  const renderStep2 = () => (
+    <Box sx={{ maxWidth: 700, mx: "auto", mt: 2 }}>
+      <Box sx={{ textAlign: "center", mb: 3 }}>
+        <Typography variant="h5" fontWeight={700} align="center" sx={{ mb: 1 }}>
+          Cuestionario Transversal
+        </Typography>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          align="center"
+          sx={{ mb: 2 }}
+        >
+          Preguntas generales para evaluar la madurez de tu organización.
+        </Typography>
+        <Divider sx={{ mb: 3 }} />
+      </Box>
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+        {generalQuestionsUI.map((q) => (
+          <QuestionItem
+            key={q.key}
+            label={q.text}
+            options={q.options}
+            value={generalAnswers[q.key]}
+            onChange={(val) =>
+              setGeneralAnswers((prev) => ({ ...prev, [q.key]: val }))
+            }
+            error={errors[`g_${q.key}`]}
+          />
+        ))}
+      </Box>
+    </Box>
+  );
+
+  // Paso 3 — sectorial (paginado 5 en 5)
+  const renderStep3 = () => {
+    const pageSize = 5;
+    const startIdx = sectorPage * pageSize;
+    const endIdx = Math.min(startIdx + pageSize, sectorQuestions.length);
+    const currentQuestions = sectorQuestions.slice(startIdx, endIdx);
     return (
       <Box sx={{ maxWidth: 700, mx: "auto", mt: 2 }}>
         <Box sx={{ textAlign: "center", mb: 3 }}>
@@ -531,46 +703,6 @@ export default function QuestionnaireStepper() {
             align="center"
             sx={{ mb: 1 }}
           >
-            Cuestionario Transversal
-          </Typography>
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            align="center"
-            sx={{ mb: 2 }}
-          >
-            Preguntas generales para evaluar la madurez de tu organización.
-          </Typography>
-          <Divider sx={{ mb: 3 }} />
-        </Box>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-          {generalQuestions.map((q) => (
-            <QuestionItem
-              key={q.key}
-              label={q.text}
-              options={q.options}
-              value={generalAnswers[q.key]}
-              onChange={(val) =>
-                setGeneralAnswers((prev) => ({ ...prev, [q.key]: val }))
-              }
-              error={errors[`g_${q.key}`]}
-            />
-          ))}
-        </Box>
-      </Box>
-    );
-  };
-
-  // Paso 3 — preguntas sectoriales desde JSON (con mismo diseño que transversal)
-  const renderStep3 = () => {
-    const pageSize = 5;
-    const startIdx = sectorPage * pageSize;
-    const endIdx = Math.min(startIdx + pageSize, sectorQuestions.length);
-    const currentQuestions = sectorQuestions.slice(startIdx, endIdx);
-    return (
-      <Box sx={{ maxWidth: 700, mx: "auto", mt: 2 }}>
-        <Box sx={{ textAlign: "center", mb: 3 }}>
-          <Typography variant="h5" fontWeight={700} align="center" sx={{ mb: 1 }}>
             Cuestionario Sectorial
           </Typography>
           <Typography
@@ -579,7 +711,7 @@ export default function QuestionnaireStepper() {
             align="center"
             sx={{ mb: 2 }}
           >
-            Preguntas específicas del sector seleccionadas según tu industria.
+            Preguntas específicas según la industria seleccionada.
           </Typography>
           <Divider sx={{ mb: 3 }} />
         </Box>
@@ -622,103 +754,127 @@ export default function QuestionnaireStepper() {
     );
   };
 
-  // Paso 4 — resultado (borrador)
-  const renderStep4 = () => (
-    <Box sx={{ maxWidth: 980, mx: "auto" }}>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Typography variant="h5" fontWeight={700} align="center">
-            Resultado (borrador)
-          </Typography>
-          <Divider sx={{ mt: 2, mb: 2 }} />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Card variant="outlined">
-            <CardContent>
-              <Typography fontWeight={600} sx={{ mb: 1 }}>
-                Datos generales
-              </Typography>
-              <Typography variant="body2">
-                Empresa: <b>{form.companyName || "—"}</b>
-              </Typography>
-              <Typography variant="body2">
-                Tamaño: <b>{form.companySize || "—"}</b>
-              </Typography>
-              <Typography variant="body2">
-                Años en operación: <b>{form.yearsInOperation || "—"}</b>
-              </Typography>
-              <Typography variant="body2">
-                ERP previo: <b>{form.priorErpUsage === "si" ? "Sí" : "No"}</b>
-              </Typography>
-              <Typography variant="body2">
-                Industria: <b>{form.industry || "—"}</b>
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Card variant="outlined">
-            <CardContent>
-              <Typography fontWeight={600} sx={{ mb: 1 }}>
-                Respuestas transversales
-              </Typography>
-              {generalQuestions.map((q) => (
-                <Typography key={q.key} variant="body2">
-                  {q.text} — <b>{generalAnswers[q.key] || "—"}</b>
-                </Typography>
-              ))}
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12}>
-          <Card variant="outlined" sx={{ mt: 3 }}>
-            <CardContent>
-              <Typography fontWeight={600} sx={{ mb: 1 }}>
-                Respuestas sectoriales
-              </Typography>
-              {(() => {
-                // Obtener preguntas sectoriales del JSON según industria
-                const base =
-                  SECTOR_FILE_BY_INDUSTRY[form.industry] ||
-                  slugify(form.industry || "");
-                const sectorData = sectorBundles[base];
-                const sectorList = Array.isArray(sectorData)
-                  ? sectorData
-                  : sectorData?.preguntas || sectorData?.questions || [];
-                return sectorList.length > 0 ? (
-                  sectorList.map((q, idx) => {
-                    // Si el formato es objeto con opciones tipo objeto
-                    const key = q.key || q.id || `s_${idx}`;
-                    const label = q.text || q.pregunta || `Pregunta ${idx + 1}`;
-                    let answer = sectorAnswers[key] || "—";
-                    // Si las opciones son objetos, mostrar el texto
-                    if (
-                      Array.isArray(q.options) &&
-                      typeof q.options[0] === "object"
-                    ) {
-                      const found = q.options.find(
-                        (opt) => opt.text === answer || opt.value === answer
-                      );
-                      answer = found ? found.text : answer;
-                    }
-                    return (
-                      <Typography key={key} variant="body2" sx={{ mb: 1 }}>
-                        {label} — <b>{answer}</b>
-                      </Typography>
-                    );
-                  })
-                ) : (
-                  <Typography variant="body2">
-                    No hay preguntas sectoriales para esta industria.
+  // Paso 4 — resultado con barras y áreas débiles
+  const renderStep4 = () => {
+    const { pctGeneral, pctSector, weighted, maturity, weakAreas } =
+      computeScores;
+
+    const percent = (x) => Math.round(x * 100);
+
+    const taglineByState = {
+      success: "¡La empresa está lista para una implementación de Odoo!",
+      warning:
+        "La empresa está cerca: conviene preparar terreno en áreas clave.",
+      error: "Aún no es el momento: prioriza mejoras básicas antes del ERP.",
+    };
+
+    return (
+      <Box sx={{ maxWidth: 980, mx: "auto" }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography variant="h5" fontWeight={700} align="center">
+              Resultado del Diagnóstico
+            </Typography>
+            <Divider sx={{ mt: 2, mb: 2 }} />
+          </Grid>
+
+          {/* Resumen y etiqueta */}
+          <Grid item xs={12}>
+            <Card variant="outlined" sx={{ p: 2.5 }}>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                flexWrap="wrap"
+                gap={2}
+              >
+                <Box>
+                  <Typography variant="h6" fontWeight={700}>
+                    Madurez para implementar Odoo:
                   </Typography>
-                );
-              })()}
-            </CardContent>
-          </Card>
+                  <Typography variant="body2" color="text.secondary">
+                    {taglineByState[maturity.color]}
+                  </Typography>
+                </Box>
+                <Chip
+                  label={`${maturity.label} • ${percent(weighted)}%`}
+                  color={maturity.color}
+                  sx={{ fontWeight: 700, fontSize: 16, px: 1.5, py: 0.5 }}
+                />
+              </Stack>
+
+              <Box sx={{ mt: 3 }}>
+                <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+                  Transversal ({percent(pctGeneral)}%)
+                </Typography>
+                <LinearProgress
+                  variant="determinate"
+                  value={percent(pctGeneral)}
+                  sx={{ height: 10, borderRadius: 1 }}
+                />
+              </Box>
+
+              <Box sx={{ mt: 2 }}>
+                <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+                  Sectorial ({percent(pctSector)}%)
+                </Typography>
+                <LinearProgress
+                  variant="determinate"
+                  value={percent(pctSector)}
+                  sx={{ height: 10, borderRadius: 1 }}
+                />
+              </Box>
+            </Card>
+          </Grid>
+
+          {/* Áreas a fortalecer */}
+          <Grid item xs={12}>
+            <Card variant="outlined" sx={{ mt: 3 }}>
+              <CardContent>
+                <Typography fontWeight={700} sx={{ mb: 1 }}>
+                  Áreas a fortalecer antes/durante la implementación
+                </Typography>
+                {weakAreas.length === 0 ? (
+                  <Typography variant="body2">
+                    Sin áreas críticas detectadas.
+                  </Typography>
+                ) : (
+                  <Box
+                    sx={{
+                      display: "grid",
+                      gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+                      gap: 1.5,
+                    }}
+                  >
+                    {weakAreas.map((w, i) => (
+                      <Card key={i} variant="outlined" sx={{ p: 1.5 }}>
+                        <Typography variant="body2" sx={{ mb: 0.5 }}>
+                          {w.label}
+                        </Typography>
+                        <LinearProgress
+                          variant="determinate"
+                          value={Math.round((w.got / w.max) * 100)}
+                          sx={{ height: 8, borderRadius: 1 }}
+                        />
+                      </Card>
+                    ))}
+                  </Box>
+                )}
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                  sx={{ display: "block", mt: 1 }}
+                >
+                  * Recomendación: si el estado es “Casi lista”, atiende primero
+                  estas áreas y agenda plan de arranque.
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
-    </Box>
-  );
+      </Box>
+    );
+  };
 
   const renderStepContent = (step) => {
     if (step === 0) return renderStep0();
@@ -781,10 +937,12 @@ export default function QuestionnaireStepper() {
                 variant="contained"
                 color="primary"
                 onClick={() => {
+                  // Aquí ya puedes enviar al backend si quieres
                   console.log("Formulario listo para enviar:", {
                     form,
                     generalAnswers,
                     sectorAnswers,
+                    scores: computeScores,
                   });
                 }}
               >
