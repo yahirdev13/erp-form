@@ -63,33 +63,13 @@ const industries = [
 ];
 
 // 3–5 preguntas generales (transversales)
-const generalQuestions = [
-  {
-    key: "processDocs",
-    text: "¿Tienen documentados los procesos clave (ventas, compras, inventario, contabilidad)?",
-    options: ["Sí", "Parcialmente", "No"],
-  },
-  {
-    key: "projectLead",
-    text: "¿Existe un responsable interno para liderar la implementación y la gestión del cambio?",
-    options: ["Sí", "No"],
-  },
-  {
-    key: "dataQuality",
-    text: "¿La información (clientes, proveedores, productos, inventario) está centralizada y actualizada?",
-    options: ["Sí", "Parcialmente", "No"],
-  },
-  {
-    key: "budget",
-    text: "¿Cuentan con presupuesto mínimo de $35,000 MXN para la fase inicial de implementación?",
-    options: ["Sí", "No"],
-  },
-  {
-    key: "willingnessChange",
-    text: "¿Qué tanto están dispuestos a adaptar procesos a mejores prácticas del ERP?",
-    options: ["Alto", "Medio", "Bajo"],
-  },
-];
+import generalData from "../data/general.json";
+
+const generalQuestions = (generalData.questions || []).map((q) => ({
+  key: q.id || q.text,
+  text: q.text,
+  options: q.options.map((opt) => (typeof opt === "string" ? opt : opt.text)),
+}));
 
 // Carga estática de JSONs por sector (coloca los archivos en src/data/sectores/*.json)
 const slugify = (s) =>
@@ -137,66 +117,89 @@ const SECTOR_FILE_BY_INDUSTRY = {
 // --- Helper para pintar cada pregunta del paso 2 con layout uniforme ---
 function QuestionItem({ label, options, value, onChange, error }) {
   return (
-    <Box sx={{ mb: 4, px: 2 }}>
+    <Card elevation={3} sx={{ mb: 4, px: 3, py: 2, borderRadius: 3 }}>
       <FormControl component="fieldset" fullWidth error={!!error}>
         <Typography
           variant="subtitle2"
-          sx={{ mb: 2, textAlign: "center", fontSize: 17 }}
+          sx={{
+            mb: 2,
+            textAlign: "left",
+            fontSize: 17,
+            fontWeight: 600,
+            color: "primary.main",
+          }}
         >
           {label}
         </Typography>
-        <Box sx={{ display: "flex", justifyContent: "center", gap: 4 }}>
-          <RadioGroup
-            row
-            value={value || ""}
-            onChange={(e) => onChange(e.target.value)}
-            sx={{ gap: 4 }}
-          >
-            {options.map((opt, idx) => {
-              // Si la opción es un objeto, usar opt.text o opt.value como key y value
-              if (typeof opt === "object" && opt !== null) {
-                return (
-                  <FormControlLabel
-                    key={opt.text || opt.value || idx}
-                    value={opt.text || opt.value}
-                    control={<Radio />}
-                    label={
-                      <Typography sx={{ fontSize: 16 }}>
-                        {opt.text || opt.value}
-                      </Typography>
-                    }
-                    sx={{ mx: 2 }}
-                  />
-                );
-              }
-              // Si es string, usar el string como key y value
+        <RadioGroup
+          row
+          value={value || ""}
+          onChange={(e) => onChange(e.target.value)}
+          sx={{
+            gap: 2,
+            flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "flex-start",
+            mt: 1,
+          }}
+        >
+          {options.map((opt, idx) => {
+            if (typeof opt === "object" && opt !== null) {
               return (
                 <FormControlLabel
-                  key={opt}
-                  value={opt}
+                  key={opt.text || opt.value || idx}
+                  value={opt.text || opt.value}
                   control={<Radio />}
-                  label={<Typography sx={{ fontSize: 16 }}>{opt}</Typography>}
-                  sx={{ mx: 2 }}
+                  label={
+                    <Typography sx={{ fontSize: 16, fontWeight: 500 }}>
+                      {opt.text || opt.value}
+                    </Typography>
+                  }
+                  sx={{
+                    mx: 1,
+                    my: 0.5,
+                    borderRadius: 2,
+                    background: "#f7f7fa",
+                    px: 2,
+                  }}
                 />
               );
-            })}
-          </RadioGroup>
-        </Box>
-        {!!error && <FormHelperText>{error}</FormHelperText>}
+            }
+            return (
+              <FormControlLabel
+                key={opt}
+                value={opt}
+                control={<Radio />}
+                label={
+                  <Typography sx={{ fontSize: 16, fontWeight: 500 }}>
+                    {opt}
+                  </Typography>
+                }
+                sx={{
+                  mx: 1,
+                  my: 0.5,
+                  borderRadius: 2,
+                  background: "#f7f7fa",
+                  px: 2,
+                }}
+              />
+            );
+          })}
+        </RadioGroup>
+        {!!error && <FormHelperText sx={{ mt: 1 }}>{error}</FormHelperText>}
       </FormControl>
-    </Box>
+    </Card>
   );
 }
-
 export default function QuestionnaireStepper() {
   const [activeStep, setActiveStep] = useState(0);
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
-  const [direction, setDirection] = useState("left");
-  const [generalAnswers, setGeneralAnswers] = useState({});
   const [sectorQuestions, setSectorQuestions] = useState([]);
   const [sectorAnswers, setSectorAnswers] = useState({});
+  const [generalAnswers, setGeneralAnswers] = useState({}); // Add missing state for generalAnswers
   const [sectorPage, setSectorPage] = useState(0); // For paginating sectorial questions
+  const [direction, setDirection] = useState("left"); // Slide direction for transitions
   const prevStepRef = useRef(activeStep);
 
   const handleChange = (field) => (e, valueFromAuto) => {
@@ -281,26 +284,29 @@ export default function QuestionnaireStepper() {
     if (activeStep === 0 && !validateStep0()) return;
     if (activeStep === 1 && !validateStep1()) return;
     if (activeStep === 2 && !validateStep2()) return;
-    // Custom sectorial pagination logic
+    // Sectorial pagination logic using main navigation
     if (activeStep === 3) {
-      // Validate only visible questions
-      const startIdx = sectorPage * 5;
-      const endIdx = Math.min(startIdx + 5, sectorQuestions.length);
+      const pageSize = 5;
+      const startIdx = sectorPage * pageSize;
+      const endIdx = Math.min(startIdx + pageSize, sectorQuestions.length);
       const er = {};
       for (let idx = startIdx; idx < endIdx; idx++) {
         const q = sectorQuestions[idx];
-        const key =
-          typeof q === "string" ? `s_${idx}` : q.key || q.id || `s_${idx}`;
+        const key = typeof q === "string" ? `s_${idx}` : q.key || q.id || `s_${idx}`;
         if (!sectorAnswers[key]) er[key] = "Requerido.";
       }
       setErrors(er);
       if (Object.keys(er).length > 0) return;
-      // If more pages, go to next page, else stay (do not advance to results)
+      // If more pages, go to next page
       if (endIdx < sectorQuestions.length) {
         setSectorPage((p) => p + 1);
         return;
       }
-      // If last page, do not advance to results, just stay
+      // If last page, advance to results
+      if (activeStep < TOTAL_STEPS - 1) {
+        setDirection("left");
+        setActiveStep((s) => s + 1);
+      }
       return;
     }
     if (activeStep < TOTAL_STEPS - 1) {
@@ -315,8 +321,13 @@ export default function QuestionnaireStepper() {
       return;
     }
     if (activeStep > 0) {
+      // If in sectorial step and on first page, go back to previous step
       setDirection("right");
       setActiveStep((s) => s - 1);
+      // Reset sectorPage if leaving sectorial step
+      if (activeStep === 3) {
+        setSectorPage(0);
+      }
     }
   };
 
@@ -550,7 +561,7 @@ export default function QuestionnaireStepper() {
     );
   };
 
-  // Paso 3 — preguntas sectoriales desde JSON
+  // Paso 3 — preguntas sectoriales desde JSON (con mismo diseño que transversal)
   const renderStep3 = () => {
     const pageSize = 5;
     const startIdx = sectorPage * pageSize;
@@ -558,14 +569,14 @@ export default function QuestionnaireStepper() {
     const currentQuestions = sectorQuestions.slice(startIdx, endIdx);
     return (
       <Box sx={{ maxWidth: 700, mx: "auto", mt: 2 }}>
-        <Box sx={{ mb: 3 }}>
-          <Typography variant="h5" fontWeight={700} align="left" sx={{ mb: 1 }}>
+        <Box sx={{ textAlign: "center", mb: 3 }}>
+          <Typography variant="h5" fontWeight={700} align="center" sx={{ mb: 1 }}>
             Cuestionario Sectorial
           </Typography>
           <Typography
             variant="body2"
             color="text.secondary"
-            align="left"
+            align="center"
             sx={{ mb: 2 }}
           >
             Preguntas específicas del sector seleccionadas según tu industria.
@@ -593,89 +604,18 @@ export default function QuestionnaireStepper() {
                 : q.text || q.pregunta || `Pregunta ${globalIdx + 1}`;
               const opts = isString ? ["Sí", "No"] : q.options || ["Sí", "No"];
               return (
-                <FormControl
+                <QuestionItem
                   key={key}
-                  component="fieldset"
-                  fullWidth
-                  error={!!errors[key]}
-                  sx={{ alignItems: "flex-start" }}
-                >
-                  <Typography
-                    variant="subtitle2"
-                    sx={{ mb: 1.5, textAlign: "left", fontSize: 17 }}
-                  >
-                    {label}
-                  </Typography>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "flex-start",
-                      gap: 4,
-                    }}
-                  >
-                    <RadioGroup
-                      row
-                      value={sectorAnswers[key] || ""}
-                      onChange={(e) =>
-                        setSectorAnswers((prev) => ({
-                          ...prev,
-                          [key]: e.target.value,
-                        }))
-                      }
-                      sx={{ gap: 4 }}
-                    >
-                      {opts.map((opt, oidx) => {
-                        if (typeof opt === "object" && opt !== null) {
-                          return (
-                            <FormControlLabel
-                              key={opt.text || opt.value || oidx}
-                              value={opt.text || opt.value}
-                              control={<Radio />}
-                              label={
-                                <Typography sx={{ fontSize: 16 }}>
-                                  {opt.text || opt.value}
-                                </Typography>
-                              }
-                              sx={{ mx: 2 }}
-                            />
-                          );
-                        }
-                        return (
-                          <FormControlLabel
-                            key={opt}
-                            value={opt}
-                            control={<Radio />}
-                            label={
-                              <Typography sx={{ fontSize: 16 }}>
-                                {opt}
-                              </Typography>
-                            }
-                            sx={{ mx: 2 }}
-                          />
-                        );
-                      })}
-                    </RadioGroup>
-                  </Box>
-                  {!!errors[key] && (
-                    <FormHelperText>{errors[key]}</FormHelperText>
-                  )}
-                </FormControl>
+                  label={label}
+                  options={opts}
+                  value={sectorAnswers[key]}
+                  onChange={(val) =>
+                    setSectorAnswers((prev) => ({ ...prev, [key]: val }))
+                  }
+                  error={errors[key]}
+                />
               );
             })}
-            <Box
-              sx={{ display: "flex", justifyContent: "space-between", mt: 4 }}
-            >
-              <Button
-                disabled={sectorPage === 0}
-                onClick={handleBack}
-                variant="outlined"
-              >
-                Atrás
-              </Button>
-              <Button variant="contained" onClick={handleNext}>
-                {endIdx < sectorQuestions.length ? "Siguiente" : "Finalizar"}
-              </Button>
-            </Box>
           </Box>
         )}
       </Box>
