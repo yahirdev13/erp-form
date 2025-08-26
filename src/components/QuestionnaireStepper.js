@@ -72,7 +72,6 @@ import generalData from "../data/general.json";
 const generalQuestionsUI = (generalData.questions || []).map((q) => ({
   key: q.id ?? q.text,
   text: q.text,
-  // Para UI basta el texto. Si trae objetos, muestro el .text:
   options: (q.options || []).map((opt) =>
     typeof opt === "string" ? opt : opt.text
   ),
@@ -93,7 +92,7 @@ let sectorBundles = {};
 try {
   const ctx = require.context("../data/sectors", false, /\.json$/);
   ctx.keys().forEach((k) => {
-    const name = k.replace("./", "").replace(".json", "");
+    const name = k.replace("./", "").replace(".json", "").toLowerCase();
     const mod = ctx(k);
     sectorBundles[name] = mod.default || mod;
   });
@@ -126,7 +125,6 @@ const SECTOR_FILE_BY_INDUSTRY = {
 const DEFAULT_SCORING = {
   weights: { general: 0.4, sector: 0.6 }, // ponderación
   thresholds: { mature: 0.75, almost: 0.55 }, // 75% y 55%
-  // Si no hay score en las opciones, se usa este mapeo heurístico:
   fallbackScores: [
     { match: /sí|si/i, score: 5 },
     { match: /parcial|manual/i, score: 3 },
@@ -134,22 +132,11 @@ const DEFAULT_SCORING = {
   ],
 };
 
-let SCORING = DEFAULT_SCORING;
-try {
-  // Opcional: crea src/data/scoring.json para sobreescribir
-  // { "weights": { "general": 0.5, "sector": 0.5 }, "thresholds": { "mature": 0.8, "almost": 0.6 } }
-  // Nota: No rompas el build si no existe.
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const cfg = require("../data/scoring.json");
-  SCORING = { ...DEFAULT_SCORING, ...cfg };
-} catch (_e) {
-  // usa defaults
-}
+const SCORING = DEFAULT_SCORING;
 
 // --------------- Helpers de scoring ----------------
 const getOptionScore = (answerValue, options) => {
   if (!options || options.length === 0) return 0;
-  // Si hay score explícito:
   const foundObj = options.find(
     (opt) =>
       typeof opt === "object" &&
@@ -157,30 +144,25 @@ const getOptionScore = (answerValue, options) => {
   );
   if (foundObj && typeof foundObj.score === "number") return foundObj.score;
 
-  // Si son strings o no traen score: usa fallback
   const asText = String(answerValue ?? "").trim();
   for (const rule of SCORING.fallbackScores) {
     if (rule.match.test(asText)) return rule.score;
   }
-  // Último recurso: asigna 0
   return 0;
 };
 
 const getMaxScoreFromOptions = (options) => {
   if (!options || options.length === 0) return 0;
-  // Si hay scores explícitos
   const withScores = options.filter(
     (o) => typeof o === "object" && typeof o.score === "number"
   );
   if (withScores.length > 0) {
     return Math.max(...withScores.map((o) => o.score));
   }
-  // Fallback: asume el máximo de la heurística es 5
-  return 5;
+  return 5; // fallback
 };
 
 const findGeneralRawByKey = (key) => {
-  // Empareja por id o por texto
   return (
     generalQuestionsRAW.find((q) => q.id === key) ||
     generalQuestionsRAW.find((q) => q.text === key) ||
@@ -277,6 +259,55 @@ export default function QuestionnaireStepper() {
   const [direction, setDirection] = useState("left");
   const prevStepRef = useRef(activeStep);
 
+  // --- NUEVO: estados y helpers para envío a Sheets ---
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState(null);
+
+  const isLastSectorPage = () => {
+    const pageSize = 5; // debe ser el mismo valor que usas en renderStep3
+    return (sectorPage + 1) * pageSize >= sectorQuestions.length;
+  };
+
+  const resetAll = () => {
+    setForm(initialForm);
+    setErrors({});
+    setSectorQuestions([]);
+    setSectorAnswers({});
+    setGeneralAnswers({});
+    setSectorPage(0);
+    setDirection("left");
+    setActiveStep(0);
+  };
+
+  const saveToSheets = async () => {
+    setSaving(true);
+    setSaveError(null);
+    try {
+      const payload = {
+        form,
+        generalAnswers,
+        sectorAnswers,
+        scores: computeScores, // manda métricas al backend
+      };
+      const res = await fetch("/api/sheets/append", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data?.error || "No se pudo guardar en Google Sheets");
+      }
+      return true;
+    } catch (e) {
+      setSaveError(e.message);
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  };
+  // --- FIN NUEVO ---
+
   const handleChange = (field) => (e, valueFromAuto) => {
     const value =
       typeof valueFromAuto === "string" ? valueFromAuto : e?.target?.value ?? e;
@@ -355,57 +386,12 @@ export default function QuestionnaireStepper() {
     return Object.keys(er).length === 0;
   };
 
-  const handleNext = () => {
-    if (activeStep === 0 && !validateStep0()) return;
-    if (activeStep === 1 && !validateStep1()) return;
-    if (activeStep === 2 && !validateStep2()) return;
-    if (activeStep === 3) {
-      const pageSize = 5;
-      const startIdx = sectorPage * pageSize;
-      const endIdx = Math.min(startIdx + pageSize, sectorQuestions.length);
-      const er = {};
-      for (let idx = startIdx; idx < endIdx; idx++) {
-        const q = sectorQuestions[idx];
-        const key =
-          typeof q === "string" ? `s_${idx}` : q.key || q.id || `s_${idx}`;
-        if (!sectorAnswers[key]) er[key] = "Requerido.";
-      }
-      setErrors(er);
-      if (Object.keys(er).length > 0) return;
-      if (endIdx < sectorQuestions.length) {
-        setSectorPage((p) => p + 1);
-        return;
-      }
-      if (activeStep < TOTAL_STEPS - 1) {
-        setDirection("left");
-        setActiveStep((s) => s + 1);
-      }
-      return;
-    }
-    if (activeStep < TOTAL_STEPS - 1) {
-      setDirection("left");
-      setActiveStep((s) => s + 1);
-    }
-  };
-
-  const handleBack = () => {
-    if (activeStep === 3 && sectorPage > 0) {
-      setSectorPage((p) => p - 1);
-      return;
-    }
-    if (activeStep > 0) {
-      setDirection("right");
-      setActiveStep((s) => s - 1);
-      if (activeStep === 3) setSectorPage(0);
-    }
-  };
-
   // ------------------- CÁLCULO DE PUNTAJES -------------------
   const computeScores = useMemo(() => {
     // General
     let generalScore = 0;
     let generalMax = 0;
-    let generalBreakdown = []; // [{label, got, max}]
+    let generalBreakdown = [];
     for (const qUI of generalQuestionsUI) {
       const raw = findGeneralRawByKey(qUI.key);
       const opts = raw?.options ?? qUI.options ?? ["Sí", "No"];
@@ -885,6 +871,58 @@ export default function QuestionnaireStepper() {
     return null;
   };
 
+  // ⚠️ CAMBIO: vuelve async y guarda en la última página del paso 3
+  const handleNext = async () => {
+    if (activeStep === 0 && !validateStep0()) return;
+    if (activeStep === 1 && !validateStep1()) return;
+    if (activeStep === 2 && !validateStep2()) return;
+
+    if (activeStep === 3) {
+      const pageSize = 5;
+      const startIdx = sectorPage * pageSize;
+      const endIdx = Math.min(startIdx + pageSize, sectorQuestions.length);
+      const er = {};
+      for (let idx = startIdx; idx < endIdx; idx++) {
+        const q = sectorQuestions[idx];
+        const key =
+          typeof q === "string" ? `s_${idx}` : q.key || q.id || `s_${idx}`;
+        if (!sectorAnswers[key]) er[key] = "Requerido.";
+      }
+      setErrors(er);
+      if (Object.keys(er).length > 0) return;
+
+      if (endIdx < sectorQuestions.length) {
+        setSectorPage((p) => p + 1);
+        return;
+      }
+
+      // Última página sectorial → GUARDAR EN SHEETS ANTES de mostrar resultados
+      const ok = await saveToSheets();
+      if (!ok) return;
+
+      setDirection("left");
+      setActiveStep((s) => s + 1);
+      return;
+    }
+
+    if (activeStep < TOTAL_STEPS - 1) {
+      setDirection("left");
+      setActiveStep((s) => s + 1);
+    }
+  };
+
+  const handleBack = () => {
+    if (activeStep === 3 && sectorPage > 0) {
+      setSectorPage((p) => p - 1);
+      return;
+    }
+    if (activeStep > 0) {
+      setDirection("right");
+      setActiveStep((s) => s - 1);
+      if (activeStep === 3) setSectorPage(0);
+    }
+  };
+
   return (
     <Box sx={{ width: "100%" }}>
       <StepperWrapper activeStep={activeStep} />
@@ -914,6 +952,13 @@ export default function QuestionnaireStepper() {
 
           <Divider />
 
+          {/* Mensaje de error de guardado */}
+          {saveError && (
+            <Typography color="error" align="center" sx={{ p: 1 }}>
+              {saveError}
+            </Typography>
+          )}
+
           <Box
             sx={{
               display: "flex",
@@ -925,27 +970,31 @@ export default function QuestionnaireStepper() {
             {activeStep === 0 ? (
               <Box />
             ) : (
-              <Button onClick={handleBack}>Atrás</Button>
+              <Button onClick={handleBack} disabled={saving}>
+                Atrás
+              </Button>
             )}
 
             {activeStep < TOTAL_STEPS - 1 ? (
-              <Button variant="contained" onClick={handleNext}>
-                Siguiente
-              </Button>
+              activeStep === 3 && isLastSectorPage() ? (
+                <Button
+                  variant="contained"
+                  onClick={handleNext}
+                  disabled={saving}
+                >
+                  {saving ? "Enviando..." : "Enviar"}
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  onClick={handleNext}
+                  disabled={saving}
+                >
+                  Siguiente
+                </Button>
+              )
             ) : (
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => {
-                  // Aquí ya puedes enviar al backend si quieres
-                  console.log("Formulario listo para enviar:", {
-                    form,
-                    generalAnswers,
-                    sectorAnswers,
-                    scores: computeScores,
-                  });
-                }}
-              >
+              <Button variant="contained" color="primary" onClick={resetAll}>
                 Finalizar
               </Button>
             )}
