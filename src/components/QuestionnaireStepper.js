@@ -744,9 +744,7 @@ export default function QuestionnaireStepper() {
   const renderStep4 = () => {
     const { pctGeneral, pctSector, weighted, maturity, weakAreas } =
       computeScores;
-
     const percent = (x) => Math.round(x * 100);
-
     const taglineByState = {
       success: "¡La empresa está lista para una implementación de Odoo!",
       warning:
@@ -755,107 +753,232 @@ export default function QuestionnaireStepper() {
     };
 
     return (
-      <Box sx={{ maxWidth: 980, mx: "auto" }}>
-        <Grid container spacing={2}>
+      <Box sx={{ maxWidth: 980, mx: "auto", mt: 2 }}>
+        <Grid
+          container
+          spacing={3}
+          justifyContent="center"
+          alignItems="flex-start"
+        >
           <Grid item xs={12}>
-            <Typography variant="h5" fontWeight={700} align="center">
+            <Typography
+              variant="h4"
+              fontWeight={800}
+              align="center"
+              sx={{ mb: 1 }}
+            >
               Resultado del Diagnóstico
             </Typography>
-            <Divider sx={{ mt: 2, mb: 2 }} />
+            <Divider sx={{ mb: 3 }} />
           </Grid>
 
-          {/* Resumen y etiqueta */}
+          {/* Centrado de tarjetas */}
           <Grid item xs={12}>
-            <Card variant="outlined" sx={{ p: 2.5 }}>
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-                flexWrap="wrap"
-                gap={2}
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: { xs: "column", md: "row" },
+                justifyContent: "center",
+                alignItems: "flex-start",
+                gap: 4,
+              }}
+            >
+              <Card
+                elevation={4}
+                sx={{
+                  p: 3,
+                  borderRadius: 4,
+                  boxShadow: "0 4px 24px rgba(80,60,100,0.10)",
+                  minWidth: 340,
+                  maxWidth: 400,
+                  mx: "auto",
+                }}
               >
-                <Box>
-                  <Typography variant="h6" fontWeight={700}>
-                    Madurez para implementar Odoo:
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {taglineByState[maturity.color]}
-                  </Typography>
-                </Box>
-                <Chip
-                  label={`${maturity.label} • ${percent(weighted)}%`}
-                  color={maturity.color}
-                  sx={{ fontWeight: 700, fontSize: 16, px: 1.5, py: 0.5 }}
-                />
-              </Stack>
-
-              <Box sx={{ mt: 3 }}>
-                <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                  Transversal ({percent(pctGeneral)}%)
-                </Typography>
-                <LinearProgress
-                  variant="determinate"
-                  value={percent(pctGeneral)}
-                  sx={{ height: 10, borderRadius: 1 }}
-                />
-              </Box>
-
-              <Box sx={{ mt: 2 }}>
-                <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                  Sectorial ({percent(pctSector)}%)
-                </Typography>
-                <LinearProgress
-                  variant="determinate"
-                  value={percent(pctSector)}
-                  sx={{ height: 10, borderRadius: 1 }}
-                />
-              </Box>
-            </Card>
-          </Grid>
-
-          {/* Áreas a fortalecer */}
-          <Grid item xs={12}>
-            <Card variant="outlined" sx={{ mt: 3 }}>
-              <CardContent>
-                <Typography fontWeight={700} sx={{ mb: 1 }}>
-                  Áreas a fortalecer antes/durante la implementación
-                </Typography>
-                {weakAreas.length === 0 ? (
-                  <Typography variant="body2">
-                    Sin áreas críticas detectadas.
-                  </Typography>
-                ) : (
-                  <Box
-                    sx={{
-                      display: "grid",
-                      gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-                      gap: 1.5,
-                    }}
-                  >
-                    {weakAreas.map((w, i) => (
-                      <Card key={i} variant="outlined" sx={{ p: 1.5 }}>
-                        <Typography variant="body2" sx={{ mb: 0.5 }}>
-                          {w.label}
-                        </Typography>
-                        <LinearProgress
-                          variant="determinate"
-                          value={Math.round((w.got / w.max) * 100)}
-                          sx={{ height: 8, borderRadius: 1 }}
-                        />
-                      </Card>
-                    ))}
-                  </Box>
-                )}
                 <Typography
-                  variant="caption"
-                  color="text.secondary"
-                  sx={{ display: "block", mt: 1 }}
+                  variant="h6"
+                  fontWeight={700}
+                  align="left"
+                  sx={{ mb: 1 }}
                 >
-                  * Recomendación: si el estado es “Casi lista”, atiende primero
-                  estas áreas y agenda plan de arranque.
+                  Madurez para implementar Odoo
                 </Typography>
-              </CardContent>
-            </Card>
+                <Typography
+                  variant="body1"
+                  color="text.secondary"
+                  align="left"
+                  sx={{ mb: 2 }}
+                >
+                  {taglineByState[maturity.color]}
+                </Typography>
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  gap={2}
+                  sx={{ mb: 2 }}
+                >
+                  <Chip
+                    label={`${maturity.label} • ${percent(weighted)}%`}
+                    color={maturity.color}
+                    sx={{
+                      fontWeight: 700,
+                      fontSize: 18,
+                      px: 2,
+                      py: 1,
+                      borderRadius: 2,
+                      background:
+                        maturity.color === "success"
+                          ? "#2e7d32"
+                          : maturity.color === "warning"
+                          ? "#ed6c02"
+                          : "#d32f2f",
+                      color: "#fff",
+                    }}
+                  />
+                </Stack>
+                <Box sx={{ mb: 2 }}>
+                  <Typography
+                    variant="subtitle1"
+                    fontWeight={600}
+                    sx={{ mb: 0.5 }}
+                  >
+                    Transversal ({percent(pctGeneral)}%)
+                  </Typography>
+                  <LinearProgress
+                    variant="determinate"
+                    value={percent(pctGeneral)}
+                    sx={{
+                      height: 12,
+                      borderRadius: 2,
+                      background: "#f3eaf7",
+                      "& .MuiLinearProgress-bar": { background: "#6d4a6e" },
+                    }}
+                  />
+                </Box>
+                <Box>
+                  <Typography
+                    variant="subtitle1"
+                    fontWeight={600}
+                    sx={{ mb: 0.5 }}
+                  >
+                    Sectorial ({percent(pctSector)}%)
+                  </Typography>
+                  <LinearProgress
+                    variant="determinate"
+                    value={percent(pctSector)}
+                    sx={{
+                      height: 12,
+                      borderRadius: 2,
+                      background: "#f3eaf7",
+                      "& .MuiLinearProgress-bar": { background: "#6d4a6e" },
+                    }}
+                  />
+                </Box>
+              </Card>
+
+              <Card
+                elevation={2}
+                sx={{
+                  p: 2.5,
+                  borderRadius: 4,
+                  boxShadow: "0 2px 12px rgba(80,60,100,0.07)",
+                  minWidth: 340,
+                  maxWidth: 500,
+                  mx: "auto",
+                  mt: { xs: 4, md: 0 },
+                }}
+              >
+                <CardContent sx={{ p: 0 }}>
+                  <Typography
+                    fontWeight={700}
+                    variant="h6"
+                    align="left"
+                    sx={{ mb: 2 }}
+                  >
+                    Áreas a fortalecer
+                    <span style={{ fontWeight: 400, fontSize: 15 }}>
+                      {" "}
+                      antes/durante la implementación
+                    </span>
+                  </Typography>
+                  {weakAreas.length === 0 ? (
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      align="left"
+                    >
+                      Sin áreas críticas detectadas.
+                    </Typography>
+                  ) : (
+                    <Box
+                      sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+                    >
+                      {weakAreas.map((w, i) => (
+                        <Box
+                          key={i}
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 2,
+                            mb: 1,
+                          }}
+                        >
+                          <Box
+                            sx={{
+                              minWidth: 32,
+                              minHeight: 32,
+                              background: "#f3eaf7",
+                              borderRadius: "50%",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              mr: 1,
+                            }}
+                          >
+                            <span
+                              role="img"
+                              aria-label="alert"
+                              style={{ fontSize: 20 }}
+                            >
+                              ⚠️
+                            </span>
+                          </Box>
+                          <Box sx={{ flex: 1 }}>
+                            <Typography
+                              variant="body2"
+                              fontWeight={600}
+                              sx={{ mb: 0.5 }}
+                            >
+                              {w.label}
+                            </Typography>
+                            <LinearProgress
+                              variant="determinate"
+                              value={Math.round((w.got / w.max) * 100)}
+                              sx={{
+                                height: 8,
+                                borderRadius: 2,
+                                background: "#f3eaf7",
+                                "& .MuiLinearProgress-bar": {
+                                  background: "#6d4a6e",
+                                },
+                              }}
+                            />
+                          </Box>
+                        </Box>
+                      ))}
+                    </Box>
+                  )}
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                    align="left"
+                    sx={{ display: "block", mt: 2 }}
+                  >
+                    * Recomendación: si el estado es “Casi lista”, atiende
+                    primero estas áreas y agenda plan de arranque.
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Box>
           </Grid>
         </Grid>
       </Box>
