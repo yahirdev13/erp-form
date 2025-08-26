@@ -50,17 +50,9 @@ export default function HeroSection() {
                 variant="contained"
                 color="primary"
                 size="large"
-                href="/evaluacion-erp"
+                href="#cuestionario"
               >
                 Evaluar Madurez ERP
-              </Button>
-              <Button
-                variant="outlined"
-                color="primary"
-                size="large"
-                href="/servicios"
-              >
-                Ver Servicios
               </Button>
             </Stack>
           </Grid>

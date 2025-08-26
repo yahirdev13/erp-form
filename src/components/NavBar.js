@@ -14,12 +14,7 @@ export default function NavBar() {
   const theme = useTheme();
 
   // Define aquí tus rutas y textos:
-  const links = [
-    { label: "Servicios", href: "/servicios" },
-    { label: "Nosotros", href: "/about" },
-    { label: "Evaluación ERP", href: "/evaluacion-erp" },
-    { label: "Contacto", href: "/contacto" },
-  ];
+  const links = [{ label: "Servicios", href: "#servicios" }];
 
   return (
     <AppBar
@@ -49,8 +44,8 @@ export default function NavBar() {
           </Typography>
         </Box>
 
-        {/* Links de navegación */}
-        <Box>
+        {/* Links de navegación y Botón CTA juntos */}
+        <Box sx={{ display: "flex", alignItems: "center" }}>
           {links.map(({ label, href }) => (
             <Button
               key={href}
@@ -64,22 +59,20 @@ export default function NavBar() {
               {label}
             </Button>
           ))}
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{
+              borderRadius: 2,
+              px: 3,
+              ml: 2,
+            }}
+            component={Link}
+            href="#cuestionario"
+          >
+            Evaluar Madurez ERP
+          </Button>
         </Box>
-
-        {/* Botón CTA */}
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{
-            borderRadius: 2,
-            px: 3,
-            ml: 2,
-          }}
-          component={Link}
-          href="/evaluacion-erp"
-        >
-          Evaluar Madurez ERP
-        </Button>
       </Toolbar>
     </AppBar>
   );

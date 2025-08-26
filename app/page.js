@@ -13,8 +13,12 @@ export default function Page() {
       <HeroSection />
 
       <ParthersSection />
-      <ServicesSection />
-      <QuestionnaireStepper />
+      <div id="servicios">
+        <ServicesSection />
+      </div>
+      <div id="cuestionario">
+        <QuestionnaireStepper />
+      </div>
     </div>
   );
 }
