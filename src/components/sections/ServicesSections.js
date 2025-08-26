@@ -248,24 +248,6 @@ export default function ServicesSections() {
             Descubre si tu organización está preparada para una implementación
             exitosa de Odoo ERP
           </Typography>
-          <Button
-            variant="contained"
-            size="large"
-            sx={{
-              background: secondary,
-              color: "#fff",
-              fontWeight: 700,
-              borderRadius: 2,
-              px: 4,
-              py: 1.5,
-              fontSize: 18,
-              boxShadow: `0 2px 8px rgba(${secondary}22)`,
-              textTransform: "none",
-              "&:hover": { background: primary },
-            }}
-          >
-            Evaluar Madurez ERP Ahora
-          </Button>
         </Box>
       </Container>
     </Box>
