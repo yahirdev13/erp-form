@@ -66,6 +66,7 @@ export default function NavBar() {
               borderRadius: 2,
               px: 3,
               ml: 2,
+              mt: { xs: 2, sm: 0 }, // margen superior solo en móvil
             }}
             component={Link}
             href="#cuestionario"
