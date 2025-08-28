@@ -54,6 +54,10 @@ const SolidStepIconRoot = styled("div")(({ theme, ownerState }) => ({
   ...(ownerState.completed && {
     backgroundColor: theme.palette.primary.main,
   }),
+  [theme.breakpoints.down("sm")]: {
+    width: 28,
+    height: 28,
+  },
 }));
 
 function SolidStepIcon(props) {
@@ -91,18 +95,47 @@ const steps = [
 
 function StepperWrapper({ activeStep }) {
   return (
-    <Stepper
-      alternativeLabel
-      activeStep={activeStep}
-      connector={<SolidConnector />}
-      sx={{ py: 3 }}
+    <div
+      style={{
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        boxSizing: "border-box",
+        marginBottom: 8,
+      }}
     >
-      {steps.map((label) => (
-        <Step key={label}>
-          <StepLabel StepIconComponent={SolidStepIcon}>{label}</StepLabel>
-        </Step>
-      ))}
-    </Stepper>
+      <Stepper
+        alternativeLabel
+        activeStep={activeStep}
+        connector={<SolidConnector />}
+        sx={{
+          py: { xs: 1, sm: 3 },
+          width: { xs: "100%", sm: "auto" },
+          maxWidth: 500,
+          margin: "0 auto",
+          ".MuiStepLabel-label": {
+            fontSize: { xs: "0.70rem", sm: "1rem" },
+            marginTop: { xs: 0.5, sm: 1 },
+            textAlign: "center",
+            whiteSpace: "normal",
+            maxWidth: { xs: 80, sm: "none" },
+            overflow: "visible",
+            textOverflow: "unset",
+            display: "block",
+          },
+          ".MuiStepIcon-root": {
+            width: { xs: 28, sm: 40 },
+            height: { xs: 28, sm: 40 },
+          },
+        }}
+      >
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel StepIconComponent={SolidStepIcon}>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+    </div>
   );
 }
 
