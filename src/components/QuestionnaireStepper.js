@@ -107,18 +107,18 @@ const SECTOR_FILE_BY_INDUSTRY = {
   "Educación y Formación": "educacion",
   "Alimentación y Bebidas": "alimentacion",
   "Retail (Comercio Minorista)": "retail",
-  "Comercio Electrónico": "ecommerce",
+  "Comercio Electrónico": "comercio",
   "Distribución y Logística": "logistica",
   "Tecnología y Software": "tecnologia",
   "Construcción e Inmobiliario": "construccion",
   "Salud y Farmacéutica": "salud",
   "Transporte y Movilidad": "transporte",
-  "Agricultura y Agroindustria": "agroindustria",
+  "Agricultura y Agroindustria": "agricultura",
   "Hostelería y Turismo": "turismo",
-  "Servicios Profesionales": "servicios_profesionales",
+  "Servicios Profesionales": "servicios",
   "Finanzas y Seguros": "finanzas",
   "ONGs y Sector Social": "ongs",
-  "Energía y Utilities": "energia",
+  Energía: "energia",
 };
 
 // -------- Config de scoring (intenta cargar archivo, si no, usa defaults) -----
