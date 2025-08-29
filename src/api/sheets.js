@@ -1,22 +1,51 @@
+// src/api/sheets.js
 import { google } from "googleapis";
 
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
 
+/**
+ * Autenticación:
+ * 1) Preferente: GOOGLE_CREDENTIALS_B64 = JSON del service account en base64
+ * 2) Fallback: GS_CLIENT_EMAIL/GS_PRIVATE_KEY o GOOGLE_SERVICE_ACCOUNT_EMAIL/GOOGLE_SERVICE_ACCOUNT_KEY
+ */
 function getAuth() {
+  const b64 = process.env.GOOGLE_CREDENTIALS_B64;
+
+  if (b64) {
+    try {
+      const credsJson = Buffer.from(b64, "base64").toString("utf8");
+      const creds = JSON.parse(credsJson);
+
+      if (!creds.client_email || !creds.private_key) {
+        throw new Error("JSON inválido: falta client_email o private_key");
+      }
+
+      return new google.auth.JWT({
+        email: creds.client_email,
+        key: creds.private_key,
+        scopes: SCOPES,
+      });
+    } catch (e) {
+      throw new Error(`GOOGLE_CREDENTIALS_B64 inválido: ${e.message || e}`);
+    }
+  }
+
+  // Fallback por compatibilidad
   const email =
     process.env.GS_CLIENT_EMAIL || process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
 
-  const key = (
-    process.env.GS_PRIVATE_KEY ||
-    process.env.GOOGLE_SERVICE_ACCOUNT_KEY ||
-    ""
-  ).replace(/\\n/g, "\n");
+  const rawKey =
+    process.env.GS_PRIVATE_KEY || process.env.GOOGLE_SERVICE_ACCOUNT_KEY || "";
+
+  // Soporta claves con "\n" escapados
+  const key = rawKey.replace(/\\n/g, "\n");
 
   if (!email || !key) {
     throw new Error(
-      "Faltan credenciales: GS_CLIENT_EMAIL/GS_PRIVATE_KEY o GOOGLE_SERVICE_ACCOUNT_EMAIL/GOOGLE_SERVICE_ACCOUNT_KEY"
+      "Faltan credenciales: usa GOOGLE_CREDENTIALS_B64 o bien GS_CLIENT_EMAIL/GS_PRIVATE_KEY (o GOOGLE_SERVICE_ACCOUNT_EMAIL/GOOGLE_SERVICE_ACCOUNT_KEY)"
     );
   }
+
   return new google.auth.JWT({ email, key, scopes: SCOPES });
 }
 
@@ -89,7 +118,7 @@ export async function appendDiagnosisToSheet(payload = {}) {
   const auth = getAuth();
   const sheets = google.sheets({ version: "v4", auth });
 
-  // Encabezados base
+  // Asegurar encabezados
   await ensureBaseHeaders(sheets, spreadsheetId, sheetName);
 
   // Texto de áreas débiles
@@ -98,7 +127,7 @@ export async function appendDiagnosisToSheet(payload = {}) {
       .map((w) => `${w.label} (${Math.round((w.got / w.max) * 100)}%)`)
       .join(" | ") || "";
 
-  // Fila base sin respuestas
+  // Fila sin respuestas
   const values = [
     new Date().toISOString(), // Timestamp
     form.companyName || "", // Empresa
